@@ -6,7 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-10">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-10.0.2">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -23,9 +23,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/FACUL/Topicos 2/workspace/UniBio/src/libs/dpfpenrollment.jar"/>
-	<classpathentry kind="lib" path="E:/FACUL/Topicos 2/workspace/UniBio/src/libs/dpfpverification.jar"/>
-	<classpathentry kind="lib" path="E:/FACUL/Topicos 2/workspace/UniBio/src/libs/dpotapi.jar"/>
-	<classpathentry kind="lib" path="E:/FACUL/Topicos 2/workspace/UniBio/src/libs/dpotjni.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
