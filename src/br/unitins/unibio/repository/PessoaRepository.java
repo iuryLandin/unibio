@@ -10,44 +10,48 @@ import br.unitins.unibio.application.Util;
 import br.unitins.unibio.model.Pessoa;
 
 public class PessoaRepository extends Repository<Pessoa> {
-	
+
 	public PessoaRepository(EntityManager em) {
 		super(em);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Pessoa> getUsuarios(String nome) {
-		Query query = getEntityManager().
-				createQuery("Select u From Usuario u WHERE LOWER(u.nome) LIKE LOWER(:nome) Order by u.nome");
+	public List<Pessoa> getPessoa(String nome) {
+		Query query = getEntityManager()
+				.createQuery("Select p From Pessoa p WHERE LOWER(p.nome) LIKE LOWER(:nome) Order by p.nome");
 		query.setParameter("nome", "%" + nome + "%");
-		List<Usuario> lista = query.getResultList();
-		
+		List<Pessoa> lista = query.getResultList();
+
 		if (lista == null)
-			lista = new ArrayList<Usuario>();
+			lista = new ArrayList<Pessoa>();
 		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Usuario getUsuario(String email, String senha) {
+	public List<Pessoa> getPessoas() {
+		Query query = getEntityManager()
+				.createQuery("Select p From Pessoa p WHERE p.ativo = :ativo Order by p.nome");
+		query.setParameter("ativo", true);
+		List<Pessoa> lista = query.getResultList();
 		
-		Query query = getEntityManager().
-				createQuery("Select "
-						  + "  u "
-						  + "From "
-						  + "  Usuario u "
-						  + "WHERE "
-						  + "  u.email = :email AND "
-						  + "  u.senha = :senha ");
-		
-		query.setParameter("email", email);
+		if (lista == null)
+			lista = new ArrayList<Pessoa>();
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Pessoa getUsuario(String cpf, String senha) {
+
+		Query query = getEntityManager().createQuery("Select p From Pessoa p WHERE p.cpf = :cpf AND p.senha = :senha ");
+		query.setParameter("cpf", cpf);
 		query.setParameter("senha", Util.encrypt(senha));
-		
-		List<Usuario> lista = query.getResultList();
-		
+
+		List<Pessoa> lista = query.getResultList();
+
 		if (lista == null || lista.isEmpty())
 			return null;
-		
+
 		return lista.get(0);
 	}
-	
+
 }
