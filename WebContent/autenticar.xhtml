@@ -13,8 +13,8 @@
 
 	<div class="login-box" style="border-color: black">
 		<div class="login-logo">
-			<p:link href="sobre.xhtml">
-				 <img src="./resources/images/unibio.png" width="300"></img>  
+			<p:link href="autenticar.xhtml">
+				<img src="./resources/images/unibio_transparente.png" width="300"></img>
 			</p:link>
 		</div>
 		<!-- /.login-logo -->
@@ -24,21 +24,22 @@
 				<p:panelGrid columns="1" style="text-align: center;"
 					columnClasses="ui-grid-col-12" layout="grid"
 					styleClass="ui-fluid  ">
-					<p class="login-box-msg">Informe seus dados para entrar no sistema</p>
+					<p class="login-box-msg">Informe seu CPF para regitrar
+						Entrada/Saída</p>
 
-					<p:inputText value="#{loginController.usuario.cpf}" type="cpfl"
+					<p:inputText value="#{registroController.usuario.cpf}" type="cpfl"
 						styleClass="form-control" placeholder="CPF" required="true"
 						autocomplete="off" requiredMessage="O CPF é obrigatório." />
-					<p:inputText value="#{loginController.usuario.senha}"
-						type="password" styleClass="form-control" placeholder="Senha"
-						required="true" autocomplete="off"
-						requiredMessage="A senha é obrigatória." />
 
-					<p:commandButton styleClass="btn-primary btn-block" value="Entrar"
-						action="#{loginController.entrar}" process="@form" update="@form" />
+					<p:commandButton styleClass="btn-primary btn-block"
+						value="Registrar" action="#{registroController.registrar}"
+						process="@form" update="@form" />
 
-					<a href="#">Esqueci a senha</a>
 					<br />
+					<a href="autenticarcomsenha.xhtml" style="color: blue;"
+						class="bg-warning">Não está conseguindo registrar com sua
+						Digital? Clique Aqui!</a>
+						
 				</p:panelGrid>
 
 			</h:form>

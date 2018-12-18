@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:adm="http://github.com/adminfaces"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>UniBio</title>
+</h:head>
+
+<h:body styleClass="hold-transition login-page">
+
+	<div class="login-box" style="border-color: black">
+		<div class="login-logo">
+			<p:link href="login.xhtml">
+				<img src="./resources/images/unibio.png" width="300"></img>
+			</p:link>
+		</div>
+		<!-- /.login-logo -->
+		<div class="box login-box-body bg-info ">
+		<br />
+			<p:panelGrid columns="1" style="text-align: center;"
+				columnClasses="ui-grid-col-12" layout="grid"
+				styleClass="ui-fluid alert alert-danger">
+				<h2 class="login-box-msg">Sem permissão</h2>
+						Olá! Você não possui permissão para acessar essa página, retorne e tente uma outra.
+					 
+					<br />
+				<br />
+			</p:panelGrid>
+		</div>
+		<!-- /.login-box-body -->
+	</div>
+
+
+	<h:outputScript library="js" name="prism.js" target="head" />
+	<h:outputScript library="js" name="admintemplate.js" target="head" />
+	<adm:ripple />
+
+
+</h:body>
+</html>
