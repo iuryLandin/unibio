@@ -5,7 +5,6 @@ import java.io.Serializable;
 import br.unitins.unibio.application.Session;
 import br.unitins.unibio.application.Util;
 import br.unitins.unibio.model.Pessoa;
-import br.unitins.unibio.validation.Validation;
 
 public class DefaultController implements Serializable {
 

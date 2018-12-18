@@ -10,7 +10,7 @@ public class JPAFactory {
 	private JPAFactory() {}
 	
 	private static EntityManagerFactory emf = 
-		Persistence.createEntityManagerFactory("unimetria");
+		Persistence.createEntityManagerFactory("UniBio");
 	
 	public static EntityManager getEntityManager() {
 		return emf.createEntityManager();

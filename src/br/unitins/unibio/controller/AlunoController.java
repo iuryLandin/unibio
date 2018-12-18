@@ -8,21 +8,19 @@ import javax.inject.Named;
 
 import br.unitins.unibio.model.Aluno;
 import br.unitins.unibio.repository.AlunoRepository;
-import br.unitins.unibio.validation.Validation;
 
 @Named
 @ViewScoped
 public class AlunoController extends Controller<Aluno> {
  
-	public AlunoController(Validation<Aluno> validation) {
-		super(validation);
-		// TODO Auto-generated constructor stub
-	}
-
 	private static final long serialVersionUID = -6865687347822474219L;
 	
-	private List<Aluno> listaAluno = null;
+	public AlunoController() {
+		super(null);
+	}
+	
 	private String pesquisa;
+	private List<Aluno> listaAluno = null;
 	
 
 	@Override
@@ -49,6 +47,14 @@ public class AlunoController extends Controller<Aluno> {
 		AlunoRepository repository = new AlunoRepository(getEntityManager());
 		listaAluno = repository.getAlunos(pesquisa);
 	}
+
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
 	
- 
+	
 }

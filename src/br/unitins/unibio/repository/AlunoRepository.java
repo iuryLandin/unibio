@@ -17,7 +17,7 @@ public class AlunoRepository extends Repository<Aluno> {
 	@SuppressWarnings("unchecked")
 	public List<Aluno> getAlunos(String nome) {
 		Query query = getEntityManager().
-				createQuery("Select a From Aluno a WHERE LOWER(a.nome) LIKE LOWER(:nome) Order by a.ativo ASC");
+				createQuery("Select p From Aluno p WHERE LOWER(p.nome) LIKE LOWER(:nome) Order by p.nome");
 		query.setParameter("nome", "%" + nome + "%");
 		List<Aluno> lista = query.getResultList();
 		
@@ -27,14 +27,11 @@ public class AlunoRepository extends Repository<Aluno> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Aluno> getAluno() {
-		Query query = getEntityManager().
-				createQuery("Select a From Aluno a WHERE a.ativo = :ativo Order by a.nome");
-		query.setParameter("ativo", true);
-		List<Aluno> lista = query.getResultList();
-		
-		if (lista == null)
-			lista = new ArrayList<Aluno>();
+	public List<Aluno> getAlunos() {
+		List<Aluno> lista = getEntityManager().
+				createQuery("Select p From Aluno p Order by p.id desc").getResultList();
+			if (lista == null)
+				lista = new ArrayList<Aluno>();
 		return lista;
 	}
 }
