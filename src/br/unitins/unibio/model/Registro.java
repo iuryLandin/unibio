@@ -1,13 +1,16 @@
 package br.unitins.unibio.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Registro extends DefaultEntity<Registro> {
 
 	private static final long serialVersionUID = -826144251430323374L;
 
 	private String data;
-	private String entrada;
-	private String saida;
-	private Matricula matricula;
+	private String hora;
+	private Integer dia;
+	private Integer aluno;
 
 	public String getData() {
 		return data;
@@ -17,30 +20,28 @@ public class Registro extends DefaultEntity<Registro> {
 		this.data = data;
 	}
 
-	public String getEntrada() {
-		return entrada;
+	public String getHora() {
+		return hora;
 	}
 
-	public void setEntrada(String entrada) {
-		this.entrada = entrada;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
-	public String getSaida() {
-		return saida;
+	public Integer getDia() {
+		return dia;
 	}
 
-	public void setSaida(String saida) {
-		this.saida = saida;
+	public void setDia(Integer dia) {
+		this.dia = dia;
 	}
 
-	public Matricula getMatricula() {
-		return matricula;
+	public Integer getAluno() {
+		return aluno;
 	}
 
-	public void setMatricula(Matricula matricula) {
-		this.matricula = matricula;
+	public void setAluno(Integer aluno) {
+		this.aluno = aluno;
 	}
-
-	 
 
 }
