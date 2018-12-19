@@ -9,11 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import br.unitins.unibio.model.Pessoa;
 
 @WebFilter(filterName="securityFilter", urlPatterns ="/pages/*")
 public class SecurityFilter implements Filter{
@@ -26,7 +21,7 @@ public class SecurityFilter implements Filter{
 		chain.doFilter(request, response);
 		return;
 		
-		
+//		
 //		HttpServletRequest servletRequest = (HttpServletRequest) request;
 //		
 //		// imprime o endereco da pagina solicitada
@@ -34,16 +29,16 @@ public class SecurityFilter implements Filter{
 //		
 //		
 //		HttpSession session = servletRequest.getSession(false);
-//		Usuario usuario = null;
+//		Pessoa pessoa = null;
 //		
 //		if (session != null)
-//			usuario = (Usuario) session.getAttribute("usuarioLogado");
+//			pessoa = (Pessoa) session.getAttribute("usuarioLogado");
 //													  
-//		if (usuario == null) {
+//		if (pessoa == null) {
 //			((HttpServletResponse) response).sendRedirect("/topicos2/login.xhtml"); 
 //		} else {
 //			String endereco = servletRequest.getRequestURI();
-//			for (String pagina : usuario.getTipoUsuario().getPages()) {
+//			for (String pagina : pessoa.getTipoUsuario().getPages()) {
 //				if (endereco.contains(pagina)) {
 //					chain.doFilter(request, response);
 //					return;

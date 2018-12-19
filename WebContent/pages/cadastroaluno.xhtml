@@ -71,6 +71,15 @@
 							</p:selectOneRadio>
 							</h:panelGroup>
 							
+							<h:panelGroup>
+									<p:outputLabel value="Tipo de Usuário:"/>
+									<p:selectOneMenu value="#{alunoController.entity.tipoUsuario}">
+										<f:selectItem itemLabel="Selecione ...." itemValue=""/>
+										<f:selectItems value="#{alunoController.vetorTipoUsuario}"
+												var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+							
 							<p:spacer />
 						</p:panelGrid>
 
