@@ -16,6 +16,7 @@ public class Pessoa extends DefaultEntity<Pessoa> {
 	private String email;
 	private String senha;
 	private boolean ativo;
+	private TipoUsuario tipoUsuario;
 	
 	public String getNome() {
 		return nome;
@@ -46,6 +47,12 @@ public class Pessoa extends DefaultEntity<Pessoa> {
 	}
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 	
 	

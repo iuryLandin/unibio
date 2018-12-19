@@ -6,7 +6,9 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.unitins.unibio.application.Util;
 import br.unitins.unibio.model.Aluno;
+import br.unitins.unibio.model.TipoUsuario;
 import br.unitins.unibio.repository.AlunoRepository;
 
 @Named
@@ -22,7 +24,25 @@ public class AlunoController extends Controller<Aluno> {
 	private String pesquisa;
 	private List<Aluno> listaAluno = null;
 	
-
+	@Override
+	public Aluno incluir() {
+		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
+		getEntity().setSenha(senhaEncriptada);
+		
+		return super.incluir();
+	}
+	
+	@Override
+	public Aluno alterar() {
+		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
+		getEntity().setSenha(senhaEncriptada);
+		
+		return super.alterar();
+	}
+	
+	
+	
+	
 	@Override
 	public Aluno getEntity() {
 		if(entity == null)
@@ -54,6 +74,10 @@ public class AlunoController extends Controller<Aluno> {
 
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
+	}
+	
+	public TipoUsuario[] getVetorTipoUsuario() {
+		return TipoUsuario.values();
 	}
 	
 	

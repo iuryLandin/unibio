@@ -1,7 +1,7 @@
 package br.unitins.unibio.controller;
 
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 import br.unitins.unibio.application.Util;
 import br.unitins.unibio.factory.JPAFactory;
@@ -11,28 +11,31 @@ import br.unitins.unibio.repository.PessoaRepository;
 
 @Named
 @RequestScoped
-public class LoginController extends DefaultController{
+public class LoginController extends DefaultController {
+	private static final long serialVersionUID = -2482810615603773001L;
 
-	private static final long serialVersionUID = 1402543109102453042L;
-	
 	private Pessoa usuario;
 	
 	public String entrar() {
 		PessoaRepository repository = 
 				new PessoaRepository(JPAFactory.getEntityManager());
 		Pessoa usuarioValidado = repository
-				.getUsuario(getUsuario().getCpf(), getUsuario().getSenha());
+				.getUsuarioLogin(getUsuario().getCpf(), getUsuario().getSenha());
 		
 		if (usuarioValidado == null) {
-			Util.addErroMessage("Usuário ou Senha inválido.");
+			Util.addErroMessage("Usuario ou Senha invalido.");
 			return null;
 		}
 		// setando o usuario na sessao
 		setUsuarioLogado(usuarioValidado);
 		
-		return "pages/home.xhtml";
+		//return "pages/cadastroFuncionario.xhtml";
+		
+			Util.redirect("pages/cadastroaluno.xhtml");
+		return "";
+		
 	}
-	
+
 	public Pessoa getUsuario() {
 		if (usuario == null)
 			usuario = new Pessoa();
@@ -42,4 +45,6 @@ public class LoginController extends DefaultController{
 	public void setUsuario(Pessoa usuario) {
 		this.usuario = usuario;
 	}
+
+
 }

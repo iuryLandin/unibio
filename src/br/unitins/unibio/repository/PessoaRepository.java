@@ -40,17 +40,25 @@ public class PessoaRepository extends Repository<Pessoa> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Pessoa getUsuario(String cpf, String senha) {
-
-		Query query = getEntityManager().createQuery("Select p From Pessoa p WHERE p.cpf = :cpf AND p.senha = :senha ");
+	public Pessoa getUsuarioLogin(String cpf, String senha) {
+		
+		Query query = getEntityManager().
+				createQuery("Select "
+						  + "  f "
+						  + "From "
+						  + "  Pessoa f "
+						  + "WHERE "
+						  + "  f.cpf = :cpf AND "
+						  + "  f.senha = :senha ");
+		
 		query.setParameter("cpf", cpf);
 		query.setParameter("senha", Util.encrypt(senha));
-
+		
 		List<Pessoa> lista = query.getResultList();
-
+		
 		if (lista == null || lista.isEmpty())
 			return null;
-
+		
 		return lista.get(0);
 	}
 
