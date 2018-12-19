@@ -35,8 +35,8 @@
 								<p:commandLink for="itNome" value="Nome:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
-								<p:inputText id="itNome" value="#{disciplinaController.entity.nome}"
-									required="true">
+								<p:inputText id="itNome"
+									value="#{disciplinaController.entity.nome}" required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
 							</h:panelGroup>
@@ -47,7 +47,20 @@
 								<p:inputText id="itCarga"
 									value="#{disciplinaController.entity.cargaHoraria}" />
 							</h:panelGroup>
-							
+
+							<h:panelGroup>
+								<p:outputLabel value="Dia da Semana:" />
+								<p:selectOneMenu id="dia"
+									value="#{disciplinaController.entity.dia}" style="width:125px">
+									<f:selectItem itemLabel="Segunda-feira" itemValue="2" />
+									<f:selectItem itemLabel="Terça-feira" itemValue="3" />
+									<f:selectItem itemLabel="Quarda-feira" itemValue="4" />
+									<f:selectItem itemLabel="Quinta-feira" itemValue="5" />
+									<f:selectItem itemLabel="Sexta-feira" itemValue="6" />
+									<f:selectItem itemLabel="Sábado" itemValue="7" />
+								</p:selectOneMenu>
+							</h:panelGroup>
+
 							<p:spacer />
 						</p:panelGrid>
 
@@ -92,7 +105,8 @@
 				widgetVar="dlg" modal="true" width="800" height="400"
 				closeOnEscape="true">
 				<h:form>
-					<p:inputText id="itPesquisa" value="#{disciplinaController.pesquisa}" />
+					<p:inputText id="itPesquisa"
+						value="#{disciplinaController.pesquisa}" />
 					<p:commandButton value="Pesquisar"
 						actionListener="#{disciplinaController.pesquisar}"
 						process="@this itPesquisa" update="formDataTable" />
@@ -110,7 +124,7 @@
 							<p:column headerText="Nome">
 								<h:outputText value="#{disciplina.nome}" />
 							</p:column>
-							
+
 							<p:column headerText="Carga Horaria">
 								<h:outputText value="#{disciplina.cargaHoraria}" />
 							</p:column>

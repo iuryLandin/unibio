@@ -9,9 +9,10 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	 * 
 	 */
 	private static final long serialVersionUID = -292446564714689523L;
-	
+
 	private String nome;
 	private Integer cargaHoraria;
+	private Integer dia;
 
 	public String getNome() {
 		return nome;
@@ -28,6 +29,13 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	public void setCargaHoraria(Integer cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
-	
-	
+
+	public Integer getDia() {
+		return dia;
+	}
+
+	public void setDia(Integer dia) {
+		this.dia = dia;
+	}
+
 }
