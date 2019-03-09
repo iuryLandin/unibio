@@ -27,14 +27,10 @@
 					<p class="login-box-msg">Informe seu CPF para regitrar
 						Entrada/Saída</p>
 
-					<p:inputText value="#{registroController.usuario.cpf}" type="cpfl"
-						styleClass="form-control" placeholder="CPF" required="true"
-						autocomplete="off" requiredMessage="O CPF é obrigatório." />
-
-					<p:commandButton styleClass="btn-primary btn-block"
-						value="Registrar" action="#{registroController.registrar}"
-						process="@form" update="@form" />
-
+					<input type="text" id="cpf" class="form-control"/> <br />
+					
+					<input type="button" onclick="autenticar();" value="Autenticar" class="btn btn-primary form-control" />
+					
 					<br />
 					<a href="autenticarcomsenha.xhtml" style="color: blue;"
 						class="bg-warning">Não está conseguindo registrar com sua
@@ -52,10 +48,18 @@
 		<!-- /.login-box-body -->
 	</div>
 
-
+	<SCRIPT>
+	 function autenticar(){
+		 cpf = document.getElementById("cpf").value;
+		 location = "leitor:auth-"+cpf;
+	 }
+	</SCRIPT>
+	
+	
 	<h:outputScript library="js" name="prism.js" target="head" />
 	<h:outputScript library="js" name="admintemplate.js" target="head" />
 	<adm:ripple />
+	
 
 
 </h:body>
