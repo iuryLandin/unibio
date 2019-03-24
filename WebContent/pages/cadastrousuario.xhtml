@@ -10,17 +10,16 @@
 			onsuccess="PF('statusDialog').hide()" />
 
 
-<script>
-function buscaCep(){
-	var cep = $("#formDados\\:itCep").val();
-	var url = "https://viacep.com.br/ws/"+ cep +"/json/";
-		$.getJSON(url, function(response){
-			$("#formDados\\:itEndereco").val(response.logradouro);
-			$("#formDados\\:itBairro").val(response.bairro);
-	  	});
-}
-
-</script>
+		<script>
+			function buscaCep() {
+				var cep = $("#formDados\\:itCep").val();
+				var url = "https://viacep.com.br/ws/" + cep + "/json/";
+				$.getJSON(url, function(response) {
+					$("#formDados\\:itEndereco").val(response.logradouro);
+					$("#formDados\\:itBairro").val(response.bairro);
+				});
+			}
+		</script>
 
 		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
 			closable="false" resizable="false" showHeader="false">
@@ -48,25 +47,28 @@ function buscaCep(){
 								<p:commandLink for="itNome" value="Nome:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
-								<p:inputText id="itNome" value="#{usuarioController.entity.nome}"
-									required="true">
+								<p:inputText id="itNome"
+									value="#{usuarioController.entity.nome}" required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
 							</h:panelGroup>
 
 							<h:panelGroup>
 								<p:outputLabel for="itCpf" value="CPF:" />
-								<p:inputText id="itCpf" value="#{usuarioController.entity.cpf}" maxlength="11" />
+								<p:inputText id="itCpf" value="#{usuarioController.entity.cpf}"
+									maxlength="11" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itMatricula" value="Matricula:" />
-								<p:inputText id="itMatricula" value="#{usuarioController.entity.matricula}"  />
+								<p:inputText id="itMatricula"
+									value="#{usuarioController.entity.matricula}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itFone" value="Telefone:" />
-								<p:inputText id="itFone" value="#{usuarioController.entity.telefone}" maxlength="11" />
+								<p:inputText id="itFone"
+									value="#{usuarioController.entity.telefone}" maxlength="11" />
 							</h:panelGroup>
 
 							<h:panelGroup>
@@ -75,72 +77,83 @@ function buscaCep(){
 									value="#{usuarioController.entity.email}"
 									placeholder="joaosilva14@gmail.com" />
 							</h:panelGroup>
-							
-							
+
+
 							<h:panelGroup>
 								<p:outputLabel for="itSenha" value="Senha:" />
-								<p:password value="#{usuarioController.entity.senha}" id="itSenha"
-									required="true">
+								<p:password value="#{usuarioController.entity.senha}"
+									id="itSenha" required="true">
 								</p:password>
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itCep" value="CEP:" />
-								<p:inputText id="itCep" value="#{usuarioController.entity.endereco.cep}" maxlength="14" onblur="buscaCep();" />
+								<p:inputText id="itCep"
+									value="#{usuarioController.entity.endereco.cep}" maxlength="14"
+									onblur="buscaCep();" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itEndereco" value="Endereço:" />
-								<p:inputText id="itEndereco" value="#{usuarioController.entity.endereco.endereco}" />
+								<p:inputText id="itEndereco"
+									value="#{usuarioController.entity.endereco.endereco}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itBairro" value="Bairro:" />
-								<p:inputText id="itBairro" value="#{usuarioController.entity.endereco.bairro}" />
+								<p:inputText id="itBairro"
+									value="#{usuarioController.entity.endereco.bairro}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itNumero" value="Número:" />
-								<p:inputText id="itNumero" value="#{usuarioController.entity.endereco.numero}" />
+								<p:inputText id="itNumero"
+									value="#{usuarioController.entity.endereco.numero}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itComplemento" value="Complemento:" />
-								<p:inputText id="itComplemento" value="#{usuarioController.entity.endereco.complemento}" />
+								<p:inputText id="itComplemento"
+									value="#{usuarioController.entity.endereco.complemento}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itCidade" value="Cidade:" />
-								<p:inputText id="itCidade" value="#{usuarioController.entity.endereco.cidade}" />
+								<p:inputText id="itCidade"
+									value="#{usuarioController.entity.endereco.cidade}" />
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itUf" value="Estado:" />
-								<p:inputText id="itUf" value="#{usuarioController.entity.endereco.uf}" />
+								<p:inputText id="itUf"
+									value="#{usuarioController.entity.endereco.uf}" />
 							</h:panelGroup>
-							
-							<h:panelGroup>
-							<p:outputLabel for="ativo" value="Usuário Ativo:" />
-							<p:selectOneRadio id="ativo" value="#{alunoController.entity.ativo}">
-								<f:selectItem itemLabel="Sim" itemValue="1" />
-								<f:selectItem itemLabel="Não" itemValue="0" />
 
-							</p:selectOneRadio>
-							</h:panelGroup>
-							
 							<h:panelGroup>
-									<p:outputLabel value="Tipo de Usuário:"/>
-									<p:selectOneMenu value="#{alunoController.entity.tipoUsuario}">
-										<f:selectItem itemLabel="Selecione ...." itemValue=""/>
-										<f:selectItems value="#{alunoController.vetorTipoUsuario}"
-												var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}"/>
-									</p:selectOneMenu>
-								</h:panelGroup>
-								
-								<h:panelGroup >
-									<a class="btn btn-info" href="leitor:insert-#{alunoController.entity.id}">Cadastrar Biometria</a>
-								</h:panelGroup>
-							
+								<p:outputLabel for="ativo" value="Usuário Ativo:" />
+								<p:selectOneRadio id="ativo"
+									value="#{alunoController.entity.ativo}">
+									<f:selectItem itemLabel="Sim" itemValue="1" />
+									<f:selectItem itemLabel="Não" itemValue="0" />
+
+								</p:selectOneRadio>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel value="Tipo de Usuário:" />
+								<p:selectOneMenu value="#{alunoController.entity.tipoUsuario}">
+									<f:selectItem itemLabel="Selecione ...." itemValue="" />
+									<f:selectItems value="#{alunoController.vetorTipoUsuario}"
+										var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}" />
+								</p:selectOneMenu>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<a class="btn btn-info"
+									href="leitor:insert-#{alunoController.entity.id}">Cadastrar
+									Biometria</a>
+							</h:panelGroup>
+
 							<p:spacer />
 						</p:panelGrid>
 
