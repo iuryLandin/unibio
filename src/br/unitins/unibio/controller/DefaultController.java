@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 import br.unitins.unibio.application.Session;
 import br.unitins.unibio.application.Util;
-import br.unitins.unibio.model.Pessoa;
+import br.unitins.unibio.model.Usuario;
 
 public class DefaultController implements Serializable {
 
 	private static final long serialVersionUID = -5325627003084805643L;
 	private static final String userKey = "usuarioLogado";
 	
-	public Pessoa getUsuarioLogado() {
-		return (Pessoa) Session.getInstance().getAttribute(userKey);
+	public Usuario getUsuarioLogado() {
+		return (Usuario) Session.getInstance().getAttribute(userKey);
 	}
 
-	public void setUsuarioLogado(Pessoa pessoa) {
-		Session.getInstance().setAttribute(userKey, pessoa);
+	public void setUsuarioLogado(Usuario usuario) {
+		Session.getInstance().setAttribute(userKey, usuario);
 	}
 	
 	public void encerrarSessao() {

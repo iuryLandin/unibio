@@ -1,5 +1,6 @@
 package br.unitins.unibio.controller;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,71 +8,61 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.unibio.application.Util;
-import br.unitins.unibio.model.Professor;
 import br.unitins.unibio.model.TipoUsuario;
-import br.unitins.unibio.repository.ProfessorRepository;
+import br.unitins.unibio.model.Usuario;
+import br.unitins.unibio.repository.UsuarioRepository;
 
 @Named
 @ViewScoped
-public class ProfessorController extends Controller<Professor> {
- 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1419338688699739056L;
-	
+public class UsuarioController extends Controller<Usuario> {
 
-	public ProfessorController() {
+	private static final long serialVersionUID = -6865687347822474219L;
+
+	public UsuarioController() {
 		super(null);
 	}
-	
+
 	private String pesquisa;
-	private List<Professor> listaProfessor = null;
-	
+	private List<Usuario> listaUsuario = null;
 
 	@Override
-	public Professor incluir() {
+	public Usuario incluir() {
 		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
 		getEntity().setSenha(senhaEncriptada);
-		
+
 		return super.incluir();
 	}
-	
+
 	@Override
-	public Professor alterar() {
+	public Usuario alterar() {
 		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
 		getEntity().setSenha(senhaEncriptada);
-		
+
 		return super.alterar();
 	}
-	
-	
-	
-	
+
 	@Override
-	public Professor getEntity() {
-		if(entity == null)
-			entity = new Professor();
+	public Usuario getEntity() {
+		if (entity == null)
+			entity = new Usuario();
 		return entity;
 	}
 
 	@Override
 	public void limpar() {
 		setEntity(null);
-		listaProfessor = null;
+		listaUsuario = null;
 	}
-	
 
-	public List<Professor> getListaProfessor() {
-		if (listaProfessor == null)
-			listaProfessor = new ArrayList<Professor>();
-		return listaProfessor;
+	public List<Usuario> getListaUsuario() {
+		if (listaUsuario == null)
+			listaUsuario = new ArrayList<Usuario>();
+		return listaUsuario;
 	}
-	
+
 	public void pesquisar() {
-		ProfessorRepository repository = new ProfessorRepository(getEntityManager());
-		listaProfessor = repository.getProfessores(pesquisa);
+		UsuarioRepository repository = new UsuarioRepository(getEntityManager());
+		listaUsuario = repository.getUsuarios(pesquisa);
 	}
 
 	public String getPesquisa() {
@@ -81,11 +72,10 @@ public class ProfessorController extends Controller<Professor> {
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
 	}
-	
 
 	public TipoUsuario[] getVetorTipoUsuario() {
 		return TipoUsuario.values();
 	}
-	
-	
+
+ 
 }
