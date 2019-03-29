@@ -5,7 +5,7 @@ public class Endereco extends DefaultEntity<Endereco> {
 	private static final long serialVersionUID = 6678232551387687092L;
 
 	private String cep;
-	private String endereco;
+	private String rua;
 	private String bairro;
 	private String numero;
 	private String complemento;
@@ -20,12 +20,12 @@ public class Endereco extends DefaultEntity<Endereco> {
 		this.cep = cep;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getRua() {
+		return rua;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	public String getBairro() {

@@ -1,6 +1,5 @@
 package br.unitins.unibio.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.unibio.application.Util;
+import br.unitins.unibio.model.Endereco;
 import br.unitins.unibio.model.TipoUsuario;
 import br.unitins.unibio.model.Usuario;
 import br.unitins.unibio.repository.UsuarioRepository;
@@ -24,11 +24,13 @@ public class UsuarioController extends Controller<Usuario> {
 
 	private String pesquisa;
 	private List<Usuario> listaUsuario = null;
+	private Endereco endereco;
 
 	@Override
 	public Usuario incluir() {
 		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
 		getEntity().setSenha(senhaEncriptada);
+		getEntity().setEndereco(getEndereco());
 
 		return super.incluir();
 	}
@@ -40,11 +42,13 @@ public class UsuarioController extends Controller<Usuario> {
 
 		return super.alterar();
 	}
+ 
 
 	@Override
 	public Usuario getEntity() {
-		if (entity == null)
+		if (entity == null) {
 			entity = new Usuario();
+		}
 		return entity;
 	}
 
@@ -77,5 +81,16 @@ public class UsuarioController extends Controller<Usuario> {
 		return TipoUsuario.values();
 	}
 
- 
+	public Endereco getEndereco() {
+		if(endereco == null)
+			endereco = new Endereco();
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	
+
 }

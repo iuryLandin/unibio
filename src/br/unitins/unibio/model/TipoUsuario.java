@@ -6,8 +6,9 @@ import java.util.List;
 public enum TipoUsuario {
 	
 	ADMINSTRADOR(0, "Adminstrador", 
-			Arrays.asList("cadastroaluno.xhtml","cadastrocurso.xhtml","cadastrodisciplina.xhtml","cadastroprofessor.xhtml")),
-	PROFESSOR(1, "Professor", Arrays.asList("cadastroaluno.xhtml")),
+			Arrays.asList("cadastrousuario.xhtml","cadastrocurso.xhtml","cadastrodisciplina.xhtml","relatoriogeral.xhtml")),
+	PROFESSOR(1, "Professor", Arrays.asList("relatoriogeral.xtml")),
+	VISITANTE(1, "VISITANTE", Arrays.asList("")),
 	ALUNO(1, "Aluno", Arrays.asList(""));
 	
 	private int id;

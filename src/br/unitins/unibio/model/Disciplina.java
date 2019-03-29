@@ -11,8 +11,12 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	private static final long serialVersionUID = -292446564714689523L;
 
 	private String nome;
-	private Integer cargaHoraria;
-	private Integer dia;
+	private Integer chTeorica;
+	private Integer chPratica;
+	private Integer chTotal;
+	private String turma;
+	private String ementa;
+	private Curso curso;
 
 	public String getNome() {
 		return nome;
@@ -22,20 +26,52 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 		this.nome = nome;
 	}
 
-	public Integer getCargaHoraria() {
-		return cargaHoraria;
+	public Integer getChTeorica() {
+		return chTeorica;
 	}
 
-	public void setCargaHoraria(Integer cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
+	public void setChTeorica(Integer chTeorica) {
+		this.chTeorica = chTeorica;
 	}
 
-	public Integer getDia() {
-		return dia;
+	public Integer getChPratica() {
+		return chPratica;
 	}
 
-	public void setDia(Integer dia) {
-		this.dia = dia;
+	public void setChPratica(Integer chPratica) {
+		this.chPratica = chPratica;
+	}
+
+	public Integer getChTotal() {
+		return chTotal;
+	}
+
+	public void setChTotal(Integer chTotal) {
+		this.chTotal = chTotal;
+	}
+
+	public String getTurma() {
+		return turma;
+	}
+
+	public void setTurma(String turma) {
+		this.turma = turma;
+	}
+
+	public String getEmenta() {
+		return ementa;
+	}
+
+	public void setEmenta(String ementa) {
+		this.ementa = ementa;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 }

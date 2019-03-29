@@ -17,7 +17,7 @@ public class CursoRepository extends Repository<Curso> {
 	@SuppressWarnings("unchecked")
 	public List<Curso> getCursos(String nome) {
 		Query query = getEntityManager().
-				createQuery("Select p From Curso p WHERE LOWER(p.nome) LIKE LOWER(:nome) Order by p.nome");
+				createQuery("Select c From Curso c WHERE LOWER(c.nome) LIKE LOWER(:nome) Order by c.nome");
 		query.setParameter("nome", "%" + nome + "%");
 		List<Curso> lista = query.getResultList();
 		
@@ -28,8 +28,8 @@ public class CursoRepository extends Repository<Curso> {
 	
 	@SuppressWarnings("unchecked")
 	public List<Curso> getCursos() {
-		List<Curso> lista = getEntityManager().
-				createQuery("Select p From Curso p Order by p.id desc").getResultList();
+		List<Curso> lista = getEntityManager(). 
+				createQuery("Select c From Curso c Order by c.id desc").getResultList();
 			if (lista == null)
 				lista = new ArrayList<Curso>();
 		return lista;

@@ -18,7 +18,7 @@
 				<p:autoUpdate disabled="false" />
 			</p:growl>
 		</div>
-		<h2 class="align-center">Cadastro De Disciplina</h2>
+		<h2 class="align-center">Cadastrar Disciplina</h2>
 		<div class="ui-g-12">
 			<p:panel styleClass="card no-border" toggleable="true"
 				toggleSpeed="300">
@@ -32,33 +32,65 @@
 							styleClass="ui-fluid card">
 
 							<h:panelGroup>
-								<p:commandLink for="itNome" value="Nome Disciplina:"
+								<p:commandLink for="itNome" value="Nome da Disciplina:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
+
 								<p:inputText id="itNome"
 									value="#{disciplinaController.entity.nome}" required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
 							</h:panelGroup>
 
+							<h:panelGroup>
+								<p:outputLabel value="Turma:" />
+								<p:inputText id="itTurma" maxlength="6"
+									value="#{disciplinaController.entity.turma}" />
+							</h:panelGroup>
+
 
 							<h:panelGroup>
-								<p:outputLabel value="Carga Horaria:" />
-								<p:inputText id="itCarga"
-									value="#{disciplinaController.entity.cargaHoraria}" />
+								<p:outputLabel value="Carga Horária Teórica:" />
+								<p:inputText id="itChTeorica"
+									value="#{disciplinaController.entity.chTeorica}" />
 							</h:panelGroup>
 
 							<h:panelGroup>
-								<p:outputLabel value="Dia da Semana:" />
-								<p:selectOneMenu id="dia"
-									value="#{disciplinaController.entity.dia}" style="width:125px">
-									<f:selectItem itemLabel="Segunda-feira" itemValue="2" />
-									<f:selectItem itemLabel="Terça-feira" itemValue="3" />
-									<f:selectItem itemLabel="Quarda-feira" itemValue="4" />
-									<f:selectItem itemLabel="Quinta-feira" itemValue="5" />
-									<f:selectItem itemLabel="Sexta-feira" itemValue="6" />
-									<f:selectItem itemLabel="Sábado" itemValue="7" />
-								</p:selectOneMenu>
+								<p:outputLabel value="Carga Horária Prática:" />
+								<p:inputText id="itChPratica"
+									value="#{disciplinaController.entity.chPratica}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel value="Carga Horária:" />
+								<p:inputText id="itChTotal"
+									value="#{disciplinaController.entity.chTotal}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:commandLink value="Curso:" process="@this"
+									actionListener="#{disciplinaController.abrirListagemCurso}"
+									style="color:blue; text-decoration: underline;">
+
+									<p:ajax event="dialogReturn"
+										listener="#{disciplinaController.cursoSelecionado}"
+										update="@form" />
+
+								</p:commandLink>
+
+								<p:autoComplete value="#{disciplinaController.entity.curso}"
+									var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
+									completeMethod="#{disciplinaController.getListaCursoAutoComplete}" />
+
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel value="Ementa:" />
+								<br />
+								<br />
+								<p:textEditor widgetVar="editor1" id="itEmenta"
+									value="#{disciplinaController.entity.ementa}" height="300"
+									style="margin-bottom:10px" />
 							</h:panelGroup>
 
 							<p:spacer />

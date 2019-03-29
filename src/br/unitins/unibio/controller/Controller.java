@@ -81,7 +81,7 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 			return result;
 		} catch (OptimisticLockException exception) {
 			// capiturando a excecao do version
-			Util.addInfoMessage("Erro de concorrencia. - Este registro foi atualizado por outro usuário. Selecione o registro novamente e tente edi");
+			Util.addInfoMessage("Erro de concorrencia. - Este registro foi atualizado por outro usuário. Selecione o registro novamente e tente edita-lo");
 			return null;
 		} catch (ValidationException e) {
 			Util.addErroMessage(e.getMessage());
