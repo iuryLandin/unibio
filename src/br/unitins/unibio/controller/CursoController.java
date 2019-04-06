@@ -7,25 +7,46 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.unibio.model.Curso;
+import br.unitins.unibio.model.Disciplina;
 import br.unitins.unibio.repository.CursoRepository;
 
 @Named
 @ViewScoped
 public class CursoController extends Controller<Curso> {
- 
+
 	private static final long serialVersionUID = -6865687347822474219L;
-	
+
 	public CursoController() {
 		super(null);
 	}
-	
+
 	private String pesquisa;
 	private List<Curso> listaCurso = null;
-	
+
+	private Disciplina disciplina;
+
+	public void adicionarDisciplina() {
+		if (getEntity().getListaDisciplina() == null)
+			getEntity().setListaDisciplina(new ArrayList<Disciplina>());
+		
+		// relacionando a disciplina com o curso
+		getDisciplina().setCurso(getEntity());
+		
+		// adicionando a disciplina na lista
+		getEntity().getListaDisciplina().add(getDisciplina());
+		
+		//limpando a disciplina depois da adicao
+		setDisciplina(null);
+	}
+
+	public void removerDisciplina(Disciplina disciplina) {
+		System.out.println(disciplina.getNome());
+		getEntity().getListaDisciplina().remove(disciplina);
+	}
 
 	@Override
 	public Curso getEntity() {
-		if(entity == null)
+		if (entity == null)
 			entity = new Curso();
 		return entity;
 	}
@@ -35,14 +56,13 @@ public class CursoController extends Controller<Curso> {
 		setEntity(null);
 		listaCurso = null;
 	}
-	
 
 	public List<Curso> getListaCurso() {
 		if (listaCurso == null)
 			listaCurso = new ArrayList<Curso>();
 		return listaCurso;
 	}
-	
+
 	public void pesquisar() {
 		CursoRepository repository = new CursoRepository(getEntityManager());
 		listaCurso = repository.getCursos(pesquisa);
@@ -55,6 +75,16 @@ public class CursoController extends Controller<Curso> {
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
 	}
-	
-	
+
+	public Disciplina getDisciplina() {
+		if (disciplina == null) {
+			disciplina = new Disciplina();
+		}
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+
 }

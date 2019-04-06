@@ -77,8 +77,8 @@ public class DisciplinaController extends Controller<Disciplina> {
 	}
 
 	public void cursoSelecionado(SelectEvent event) {
-		Curso curso = (Curso) event.getObject();
-		entity.setCurso(curso);
+		Curso c = (Curso) event.getObject();
+		entity.setCurso(c);
 	}
 
 	public List<Curso> getListaCurso() {
@@ -89,9 +89,5 @@ public class DisciplinaController extends Controller<Disciplina> {
 		return listaCurso;
 	}
 
-	public List<Curso> getListaCursoAutoComplete(String nome) {
-		CursoRepository repo = new CursoRepository(getEntityManager());
-		return repo.getCursos(nome);
-	}
 
 }

@@ -1,13 +1,13 @@
 package br.unitins.unibio.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Disciplina extends DefaultEntity<Disciplina> {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -292446564714689523L;
 
 	private String nome;
@@ -16,6 +16,9 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	private Integer chTotal;
 	private String turma;
 	private String ementa;
+	
+	@ManyToOne
+	@JoinColumn(name="idCurso") 
 	private Curso curso;
 
 	public String getNome() {

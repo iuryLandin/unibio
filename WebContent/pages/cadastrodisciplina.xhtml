@@ -68,6 +68,7 @@
 							</h:panelGroup>
 
 							<h:panelGroup>
+
 								<p:commandLink value="Curso:" process="@this"
 									actionListener="#{disciplinaController.abrirListagemCurso}"
 									style="color:blue; text-decoration: underline;">
@@ -77,12 +78,11 @@
 										update="@form" />
 
 								</p:commandLink>
-
-								<p:autoComplete value="#{disciplinaController.entity.curso}"
-									var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
-									completeMethod="#{disciplinaController.getListaCursoAutoComplete}" />
-
+								<p:inputText id="itCurso" disabled="true"
+									value="#{disciplinaController.entity.curso.nome}" />
 							</h:panelGroup>
+							 
+
 
 							<h:panelGroup>
 								<p:outputLabel value="Ementa:" />
@@ -157,9 +157,6 @@
 								<h:outputText value="#{disciplina.nome}" />
 							</p:column>
 
-							<p:column headerText="Carga Horaria">
-								<h:outputText value="#{disciplina.cargaHoraria}" />
-							</p:column>
 
 							<p:column>
 								<p:commandLink value="Editar" icon="fa fa-fw fa-edit"

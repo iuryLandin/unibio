@@ -4,6 +4,7 @@
 		<class>br.unitins.unibio.model.Curso</class>
 		<class>br.unitins.unibio.model.DefaultEntity</class>
 		<class>br.unitins.unibio.model.Disciplina</class>
+		<class>br.unitins.unibio.model.Evento</class>
 		<class>br.unitins.unibio.model.Registro</class>
 		<class>br.unitins.unibio.model.Usuario</class>
 	

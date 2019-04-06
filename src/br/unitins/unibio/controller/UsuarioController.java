@@ -39,7 +39,7 @@ public class UsuarioController extends Controller<Usuario> {
 	public Usuario alterar() {
 		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
 		getEntity().setSenha(senhaEncriptada);
-
+		getEntity().setEndereco(getEndereco());
 		return super.alterar();
 	}
  

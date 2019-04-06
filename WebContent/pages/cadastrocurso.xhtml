@@ -24,11 +24,32 @@
 				toggleSpeed="300">
 
 				<h:form id="formDados">
+				
+					<p:panelGrid columns="1" style="text-align: center; float: right; "
+						columnClasses="ui-grid-col-12 "
+						layout="grid" styleClass="ui-fluid  position-sticky">
+
+						<p:commandButton value="Incluir"
+							styleClass="btn-success btn-block"
+							disabled="#{cursoController.entity.id != null}"
+							actionListener="#{cursoController.incluir}"
+							update="@form formDataTable" process="@this pgDados" />
+						<p:commandButton value="Alterar"
+							styleClass="btn-primary btn-block"
+							disabled="#{cursoController.entity.id == null}"
+							actionListener="#{cursoController.alterar}"
+							update="@form formDataTable" process="@this pgDados" />
+
+
+						<p:commandButton value="Limpar" styleClass="btn-warning btn-block"
+							actionListener="#{cursoController.limpar}"
+							update="@form formDataTable" process="@this" />
+					</p:panelGrid>
 
 					<div style="text-align: left;"
 						class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
-						<p:panelGrid id="pgDados" columns="2"
-							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+						<p:panelGrid id="pgDados" columns="1"
+							columnClasses=" ui-grid-col-12" layout="grid"
 							styleClass="ui-fluid card">
 
 							<h:panelGroup>
@@ -41,7 +62,85 @@
 								</p:inputText>
 							</h:panelGroup>
 
-							
+
+							<h:panelGroup>
+								<h:panelGrid id="panelDisciplina" columns="2"
+									columnClasses="ui-grid-col-1, ui-grid-col-1" layout="grid">
+
+									<h:panelGroup>
+										<p:outputLabel value="Nome da Disciplina:" />
+										<p:inputText value="#{cursoController.disciplina.nome}" />
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<p:outputLabel value="Turma:" />
+										<p:inputText id="itTurma" maxlength="6"
+											value="#{cursoController.disciplina.turma}" />
+									</h:panelGroup>
+
+
+									<h:panelGroup>
+										<p:outputLabel value="Carga Horária Teórica:" />
+										<p:inputText id="itChTeorica"
+											value="#{cursoController.disciplina.chTeorica}" />
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<p:outputLabel value="Carga Horária Prática:" />
+										<p:inputText id="itChPratica"
+											value="#{cursoController.disciplina.chPratica}" />
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<p:outputLabel value="Carga Horária:" />
+										<p:inputText id="itChTotal"
+											value="#{cursoController.disciplina.chTotal}" />
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<p:spacer />
+									</h:panelGroup>
+
+									<h:panelGroup styleClass="ui-grid-col-12">
+										<p:outputLabel value="Ementa:" />
+										<br />
+										<br />
+										<p:textEditor widgetVar="editor1" id="itEmenta"
+											value="#{cursoController.disciplina.ementa}" height="300"
+											style="margin-bottom:10px" />
+									</h:panelGroup>
+								</h:panelGrid>
+
+
+								<h:panelGroup>
+									<p:spacer />
+									<p:commandButton value="Adicionar" styleClass="btn btn-primary"
+										actionListener="#{cursoController.adicionarDisciplina}"
+										update="panelDisciplina dtDisciplina"
+										process="@this panelDisciplina" />
+								</h:panelGroup>
+							</h:panelGroup>
+							<h:panelGroup>
+								<p:dataTable id="dtDisciplina" styleClass="box-primary"
+									var="disc" value="#{cursoController.entity.listaDisciplina}">
+									<f:facet name="header">
+										<h:outputText value="Lista de Disciplinas" />
+									</f:facet>
+									<p:column headerText="Nome">
+										<h:outputText value="#{disc.nome}" />
+									</p:column>
+									<p:column headerText="Turma">
+										<h:outputText value="#{disc.turma}" />
+									</p:column>
+									<p:column>
+										<p:commandLink value="Remover"
+											actionListener="#{cursoController.removerDisciplina(disc)}"
+											update="dtDisciplina" process="@this" />
+									</p:column>
+								</p:dataTable>
+
+							</h:panelGroup>
+
 							<p:spacer />
 						</p:panelGrid>
 
@@ -49,38 +148,11 @@
 
 					<p:spacer />
 
-					<p:panelGrid columns="4" style="text-align: center;"
-						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
-						layout="grid" styleClass="ui-fluid  ">
-
-						<p:commandButton value="Incluir"
-							styleClass="btn-primary btn-block"
-							disabled="#{cursoController.entity.id != null}"
-							actionListener="#{cursoController.incluir}"
-							update="@form formDataTable" process="@this pgDados" />
-
-						<p:commandButton value="Alterar"
-							styleClass="btn-primary btn-block"
-							disabled="#{cursoController.entity.id == null}"
-							actionListener="#{cursoController.alterar}"
-							update="@form formDataTable" process="@this pgDados" />
-
-
-						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
-							actionListener="#{cursoController.limpar}"
-							update="@form formDataTable" process="@this" />
-					</p:panelGrid>
-
-
-
 				</h:form>
 
 
 			</p:panel>
 			<p:spacer />
-
-
-
 
 			<p:dialog header="Pesquisa de Cursos" appendTo="@(body)"
 				widgetVar="dlg" modal="true" width="800" height="400"
