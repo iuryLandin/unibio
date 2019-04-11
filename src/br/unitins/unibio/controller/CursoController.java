@@ -6,8 +6,11 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import br.unitins.unibio.model.Curso;
 import br.unitins.unibio.model.Disciplina;
+import br.unitins.unibio.model.Usuario;
 import br.unitins.unibio.repository.CursoRepository;
 
 @Named
@@ -28,14 +31,14 @@ public class CursoController extends Controller<Curso> {
 	public void adicionarDisciplina() {
 		if (getEntity().getListaDisciplina() == null)
 			getEntity().setListaDisciplina(new ArrayList<Disciplina>());
-		
+
 		// relacionando a disciplina com o curso
 		getDisciplina().setCurso(getEntity());
-		
+
 		// adicionando a disciplina na lista
 		getEntity().getListaDisciplina().add(getDisciplina());
-		
-		//limpando a disciplina depois da adicao
+
+		// limpando a disciplina depois da adicao
 		setDisciplina(null);
 	}
 
@@ -43,6 +46,7 @@ public class CursoController extends Controller<Curso> {
 		System.out.println(disciplina.getNome());
 		getEntity().getListaDisciplina().remove(disciplina);
 	}
+	  
 
 	@Override
 	public Curso getEntity() {
@@ -50,11 +54,26 @@ public class CursoController extends Controller<Curso> {
 			entity = new Curso();
 		return entity;
 	}
+	
+	@Override
+	public Curso incluir() {
+		getEntity().setNome(entity.getNome());
+		System.out.println(entity.getNome());
+		return super.incluir();
+	}
+	
+	@Override
+	public Curso alterar() {
+		//getEntity().setNome(entity.getNome());
+		System.out.println(entity.getNome());
+		return super.alterar();
+	}
 
 	@Override
 	public void limpar() {
 		setEntity(null);
 		listaCurso = null;
+		setDisciplina(null);
 	}
 
 	public List<Curso> getListaCurso() {
@@ -65,7 +84,7 @@ public class CursoController extends Controller<Curso> {
 
 	public void pesquisar() {
 		CursoRepository repository = new CursoRepository(getEntityManager());
-		listaCurso = repository.getCursos(pesquisa);
+		listaCurso = repository.getCursos("");
 	}
 
 	public String getPesquisa() {
@@ -85,6 +104,17 @@ public class CursoController extends Controller<Curso> {
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+	}
+
+	public List<Curso> getListaCursoAutoComplete(String nome) {
+		CursoRepository repo = new CursoRepository(getEntityManager());
+		return repo.getCursos(nome);
+	}
+
+	public void onItemSelect(SelectEvent event) {
+		String curso = event.getObject().toString();
+		getEntity().setNome(curso);
+		setEntity( (Curso) event.getObject() );
 	}
 
 }

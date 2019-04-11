@@ -8,8 +8,8 @@ public enum TipoUsuario {
 	ADMINSTRADOR(0, "Adminstrador", 
 			Arrays.asList("cadastrousuario.xhtml","cadastrocurso.xhtml","cadastrodisciplina.xhtml","relatoriogeral.xhtml")),
 	PROFESSOR(1, "Professor", Arrays.asList("relatoriogeral.xtml")),
-	VISITANTE(1, "VISITANTE", Arrays.asList("")),
-	ALUNO(1, "Aluno", Arrays.asList(""));
+	VISITANTE(2, "Visitante", Arrays.asList("")),
+	ALUNO(3, "Aluno", Arrays.asList(""));
 	
 	private int id;
 	private String label;

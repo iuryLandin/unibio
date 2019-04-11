@@ -46,7 +46,7 @@
 							styleClass="ui-fluid card">
 
 							<h:panelGroup>
-								<p:commandLink for="itNome" value="Nome:"
+								<p:commandLink for="itNome" value="*Nome:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
 								<p:inputText id="itNome"
@@ -56,9 +56,9 @@
 							</h:panelGroup>
 
 							<h:panelGroup>
-								<p:outputLabel for="itCpf" value="CPF:" />
+								<p:outputLabel for="itCpf" value="*CPF:" />
 								<p:inputText id="itCpf" value="#{usuarioController.entity.cpf}"
-									maxlength="11" />
+									maxlength="11" required="true" />
 							</h:panelGroup>
 
 							<h:panelGroup>
@@ -68,16 +68,32 @@
 							</h:panelGroup>
 
 							<h:panelGroup>
+								<div class="col-md-4">
+									<p:outputLabel for="itRg" value="*RG:" />
+									<p:inputText id="itRg" value="#{usuarioController.entity.rg}"
+										required="true" />
+								</div>
+								<div class="col-md-4">
+									<p:outputLabel for="itSsp" value="*Orgão expeditor:" />
+									<p:inputText id="itSsp"
+										value="#{usuarioController.entity.orgaoExpeditor}"
+										required="true" />
+								</div>
+
+							</h:panelGroup>
+
+
+							<h:panelGroup>
 								<p:outputLabel for="itFone" value="Telefone:" />
 								<p:inputText id="itFone"
 									value="#{usuarioController.entity.telefone}" maxlength="11" />
 							</h:panelGroup>
 
 							<h:panelGroup>
-								<p:outputLabel value="E-mail:" />
+								<p:outputLabel value="*E-mail:" />
 								<p:inputText id="itEmail"
 									value="#{usuarioController.entity.email}"
-									placeholder="joaosilva14@gmail.com" />
+									placeholder="joaosilva14@gmail.com" required="true" />
 							</h:panelGroup>
 
 							<h:panelGroup>
@@ -123,8 +139,8 @@
 							</h:panelGroup>
 
 							<h:panelGroup>
-								<p:outputLabel for="ativo" value="Usuário Ativo:" />
-								<p:selectOneRadio id="ativo"
+								<p:outputLabel for="ativo" value="*Usuário Ativo:" />
+								<p:selectOneRadio id="ativo" required="true"
 									value="#{usuarioController.entity.ativo}">
 									<f:selectItem itemLabel="Sim" itemValue="1" />
 									<f:selectItem itemLabel="Não" itemValue="0" />
@@ -133,12 +149,57 @@
 							</h:panelGroup>
 
 							<h:panelGroup>
-								<p:outputLabel value="Tipo de Usuário:" />
-								<p:selectOneMenu value="#{usuarioController.entity.tipoUsuario}">
+								<p:outputLabel value="*Tipo de Usuário:" />
+								<p:selectOneMenu value="#{usuarioController.entity.tipoUsuario}"
+									required="true">
 									<f:selectItem itemLabel="Selecione ...." itemValue="" />
 									<f:selectItems value="#{usuarioController.vetorTipoUsuario}"
 										var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}" />
 								</p:selectOneMenu>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<h:panelGrid id="panelDisciplina" columns="2"
+									columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
+
+									<h:panelGroup styleClass="ui-inputgroup">
+										<p:outputLabel value="Disciplina:" />
+										<br />
+										<p:inputText value="#{usuarioController.disciplina.nome}" />
+
+										<p:commandLink styleClass="btn btn-info" value="Buscar"
+											onclick="PF('dlgDisciplinas').show();" process="@this" />
+									</h:panelGroup>
+
+								</h:panelGrid>
+
+								<h:panelGroup>
+									<p:spacer />
+									<p:commandButton value="Vincular"
+										actionListener="#{usuarioController.vincularDisciplina}"
+										update="panelDisciplina dtDisciplina"
+										process="@this panelDisciplina" />
+								</h:panelGroup>
+							</h:panelGroup>
+							<h:panelGroup>
+								<p:dataTable id="dtDisciplina" styleClass="box-primary"
+									var="disc" value="#{usuarioController.entity.listaDisciplina}">
+									<f:facet name="header">
+										<h:outputText value="Disciplinas Vinculadas" />
+									</f:facet>
+									<p:column headerText="Disciplina">
+										<h:outputText value="#{disc.nome}" />
+									</p:column>
+									<p:column headerText="Turma">
+										<h:outputText value="#{disc.turma}" />
+									</p:column>
+									<p:column>
+										<p:commandLink value="Remover"
+											actionListener="#{usuarioController.removerDisciplina(disc)}"
+											update="dtDisciplina" process="@this" />
+									</p:column>
+								</p:dataTable>
+
 							</h:panelGroup>
 
 							<p:spacer />
@@ -168,6 +229,14 @@
 						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
 							actionListener="#{usuarioController.limpar}"
 							update="@form formDataTable" process="@this" />
+
+
+						<p:commandButton value="Resetar Senha"
+							styleClass="btn-secondary btn-block"
+							disabled="#{usuarioController.entity.id == null}"
+							actionListener="#{usuarioController.resetarSenha}"
+							update="@form formDataTable" process="@this pgDados" />
+
 					</p:panelGrid>
 
 
@@ -213,6 +282,55 @@
 									<f:ajax render="formDados" execute="@all" />
 									<f:setPropertyActionListener value="#{usu}"
 										target="#{usuarioController.entity}" />
+								</p:commandLink>
+
+							</p:column>
+
+
+						</p:dataTable>
+					</h:form>
+				</p:panel>
+			</p:dialog>
+
+
+
+			<p:dialog header="Pesquisa de Disciplinas" appendTo="@(body)"
+				widgetVar="dlgDisciplinas" modal="true" width="800" height="400"
+				closeOnEscape="true">
+				<h:form>
+					<p:inputText id="itPesquisaDisciplina"
+						value="#{usuarioController.pesquisaDisciplina}" />
+					<p:commandButton value="Pesquisar"
+						actionListener="#{usuarioController.pesquisarDisciplina}"
+						process="@this itPesquisaDisciplina" update="formDataTable2" />
+				</h:form>
+				<p:panel styleClass="card no-border" toggleable="true"
+					toggleSpeed="300">
+					<h:form id="formDataTable2">
+						<p:dataTable styleClass="box-primary" var="obj"
+							value="#{usuarioController.listaDisciplinaLocal}">
+							<f:facet name="header">
+								<h:outputText value="Disciplinas" />
+							</f:facet>
+
+							<p:column headerText="Nome">
+								<h:outputText value="#{obj.nome}" />
+							</p:column>
+
+							<p:column headerText="Turma">
+								<h:outputText value="#{obj.turma}" />
+							</p:column>
+
+							<p:column headerText="Curso">
+								<h:outputText value="#{obj.curso.nome}" />
+							</p:column>
+
+							<p:column>
+								<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
+									styleClass="btn btn-success" action="#{usuarioController.vincularDisciplina}" update="formDados">
+									<f:ajax render="@none" execute="@this" />
+									<f:setPropertyActionListener value="#{obj}"
+										target="#{usuarioController.disciplina}"  />
 								</p:commandLink>
 
 							</p:column>

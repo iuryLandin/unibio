@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.unitins.unibio.model.Usuario;
+
 
 
 @WebFilter(filterName="securityFilter", urlPatterns ="/pages/*")
@@ -24,35 +26,35 @@ public class SecurityFilter implements Filter{
 			throws IOException, ServletException {
 		
 		//autorizando tudo
-		chain.doFilter(request, response);
-		return;
+//		chain.doFilter(request, response);
+//		return;
 		
 		
-//		HttpServletRequest servletRequest = (HttpServletRequest) request;
-//		
-//		// imprime o endereco da pagina solicitada
-//		System.out.println(servletRequest.getRequestURI());
-//		
-//		
-//		HttpSession session = servletRequest.getSession(false);
-//		Usuario usuario = null;
-//		
-//		if (session != null)
-//			usuario = (Usuario) session.getAttribute("usuarioLogado");
-//													  
-//		if (usuario == null) {
-//			((HttpServletResponse) response).sendRedirect("/topicos2/login.xhtml"); 
-//		} else {
-//			String endereco = servletRequest.getRequestURI();
-//			for (String pagina : usuario.getTipoUsuario().getPages()) {
-//				if (endereco.contains(pagina)) {
-//					chain.doFilter(request, response);
-//					return;
-//				}
-//			}
-//			
-//			((HttpServletResponse) response).sendRedirect("/topicos2/sempermissao.xhtml");
-//		}
+		HttpServletRequest servletRequest = (HttpServletRequest) request;
+		
+		// imprime o endereco da pagina solicitada
+		System.out.println(servletRequest.getRequestURI());
+		
+		
+		HttpSession session = servletRequest.getSession(false);
+		Usuario usuario = null;
+		
+		if (session != null)
+			usuario = (Usuario) session.getAttribute("usuarioLogado");
+													  
+		if (usuario == null) {
+			((HttpServletResponse) response).sendRedirect("/UniBio/login.xhtml"); 
+		} else {
+			String endereco = servletRequest.getRequestURI();
+			for (String pagina : usuario.getTipoUsuario().getPages()) {
+				if (endereco.contains(pagina)) {
+					chain.doFilter(request, response);
+					return;
+				}
+			}
+			
+			((HttpServletResponse) response).sendRedirect("/UniBio/sempermissao.xhtml");
+		}
 	}
 
 
@@ -61,7 +63,7 @@ public class SecurityFilter implements Filter{
 	public void init(FilterConfig filterConfig) throws ServletException {
 		Filter.super.init(filterConfig);
 		
-		System.out.println("\n\n\n\n\n iniciou o Security Filter \n\n\n\n\n\n");
+		System.out.println("\n\n\n\n\n Security Filter INICIADO \n\n\n\n\n\n");
 	}
  
 }

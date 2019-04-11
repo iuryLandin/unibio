@@ -1,10 +1,13 @@
 package br.unitins.unibio.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -13,6 +16,8 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private static final long serialVersionUID = -3763771903748482697L;
 	private String nome;
 	private String cpf;
+	private String rg;
+	private String orgaoExpeditor;
 	private String matricula;
 	private String telefone;
 	private String email;
@@ -23,6 +28,9 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private Date data_alteracao;
 	private Usuario user;
 	private boolean ativo;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+	private List<Disciplina> listaDisciplina;
 
 	public String getNome() {
 		return nome;
@@ -118,6 +126,30 @@ public class Usuario extends DefaultEntity<Usuario> {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getOrgaoExpeditor() {
+		return orgaoExpeditor;
+	}
+
+	public void setOrgaoExpeditor(String orgaoExpeditor) {
+		this.orgaoExpeditor = orgaoExpeditor;
+	}
+
+	public List<Disciplina> getListaDisciplina() {
+		return listaDisciplina;
+	}
+
+	public void setListaDisciplina(List<Disciplina> listaDisciplina) {
+		this.listaDisciplina = listaDisciplina;
 	}
 
 }

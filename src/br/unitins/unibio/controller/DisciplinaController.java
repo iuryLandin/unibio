@@ -14,6 +14,7 @@ import org.primefaces.event.SelectEvent;
 
 import br.unitins.unibio.model.Curso;
 import br.unitins.unibio.model.Disciplina;
+import br.unitins.unibio.model.Endereco;
 import br.unitins.unibio.repository.CursoRepository;
 import br.unitins.unibio.repository.DisciplinaRepository;
 
@@ -24,6 +25,7 @@ public class DisciplinaController extends Controller<Disciplina> {
 	private static final long serialVersionUID = -6865687347822474219L;
 
 	private List<Curso> listaCurso = null;
+	private Curso curso;
 
 	public DisciplinaController() {
 		super(null);
@@ -37,6 +39,12 @@ public class DisciplinaController extends Controller<Disciplina> {
 		if (entity == null)
 			entity = new Disciplina();
 		return entity;
+	}
+	
+	@Override
+	public Disciplina incluir() {
+		
+		return super.incluir();
 	}
 
 	@Override
@@ -55,7 +63,13 @@ public class DisciplinaController extends Controller<Disciplina> {
 		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
 		listaDisciplina = repository.getDisciplinas(pesquisa);
 	}
-
+	
+	public void editarDisciplina(Disciplina disciplina) {
+		System.out.println(disciplina.getNome());
+		//setEntity(disciplina);
+		entity = disciplina;
+	}
+ 
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -80,7 +94,9 @@ public class DisciplinaController extends Controller<Disciplina> {
 		Curso c = (Curso) event.getObject();
 		entity.setCurso(c);
 	}
-
+	
+	 
+	
 	public List<Curso> getListaCurso() {
 		if (listaCurso == null) {
 			CursoRepository repo = new CursoRepository(getEntityManager());
@@ -89,5 +105,17 @@ public class DisciplinaController extends Controller<Disciplina> {
 		return listaCurso;
 	}
 
+	public Curso getCurso() {
+		if (curso == null)
+			curso = new Curso();
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	
+	
 
 }

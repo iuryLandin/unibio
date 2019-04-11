@@ -18,163 +18,184 @@
 				<p:autoUpdate disabled="false" />
 			</p:growl>
 		</div>
-		<h2 class="align-center">Cadastrar Disciplina</h2>
+
+		<p:dialog header="Pesquisa de Cursos" appendTo="@(body)"
+			widgetVar="dlg" modal="true" width="800" height="400"
+			closeOnEscape="true">
+			<h:form id="formEditarCurso">
+				<div class="ui-inputgroup"></div>
+			</h:form>
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+				<h:form id="formDataTable">
+					<p:dataTable styleClass="box-primary" var="curso"
+						value="#{cursoController.listaCurso}">
+						<f:facet name="header">
+							<h:outputText value="Cursos Cadastrados" />
+						</f:facet>
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{curso.nome}" />
+						</p:column>
+
+						<p:column>
+							<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
+								styleClass="btn btn-primary" oncomplete="PF('dlg').hide();">
+								<f:ajax render="formDados" execute="@all" />
+								<f:setPropertyActionListener value="#{curso}"
+									target="#{cursoController.entity}" />
+							</p:commandLink>
+
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</p:dialog>
+
+		<h2 class="align-center">Gerenciar Disciplina</h2>
 		<div class="ui-g-12">
 			<p:panel styleClass="card no-border" toggleable="true"
 				toggleSpeed="300">
 
 				<h:form id="formDados">
+					<h:panelGroup id="pgDados">
+						<div class="block">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="ui-inputgroup">
 
-					<div style="text-align: left;"
-						class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
-						<p:panelGrid id="pgDados" columns="2"
-							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
-							styleClass="ui-fluid card">
+										<p:inputText id="itCurso"
+											value="#{disciplinaController.entity.curso.nome}"
+											styleClass="form-control" required="true" placeholder="Curso">
+											<p:focus for="itCurso" disabled="true" />
+										</p:inputText>
 
-							<h:panelGroup>
-								<p:commandLink for="itNome" value="Nome da Disciplina:"
-									onclick="PF('dlg').show();" process="@this"
-									style="color:blue; text-decoration: underline;" />
+										<p:commandLink value="Selecionar" process="@this"
+											styleClass="btn btn-primary"
+											actionListener="#{disciplinaController.abrirListagemCurso}">
+											<p:ajax event="dialogReturn"
+												listener="#{disciplinaController.cursoSelecionado}"
+												update="@form" />
+										</p:commandLink>
 
-								<p:inputText id="itNome"
-									value="#{disciplinaController.entity.nome}" required="true">
-									<p:focus for="itNome" />
-								</p:inputText>
-							</h:panelGroup>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<p:outputLabel value="Disciplina:" />
+									<br />
+									<p:inputText id="itNome"
+										value="#{disciplinaController.entity.nome}" required="true">
+										<p:focus for="itNome" />
+									</p:inputText>
+								</div>
+								<div class="col-md-6">
 
-							<h:panelGroup>
-								<p:outputLabel value="Turma:" />
-								<p:inputText id="itTurma" maxlength="6"
-									value="#{disciplinaController.entity.turma}" />
-							</h:panelGroup>
+									<p:dataTable id="dtDisciplina" styleClass="box-primary"
+										var="disc" value="#{cursoController.entity.listaDisciplina}">
+										<f:facet name="header">
+											<h:outputText value="Lista de Disciplinas" />
+										</f:facet>
+										<p:column headerText="Nome">
+											<h:outputText value="#{disc.nome}" />
+										</p:column>
+										<p:column headerText="Turma">
+											<h:outputText value="#{disc.turma}" />
+										</p:column>
+										
+										<p:column>
+											<p:commandLink value="Remover"
+												actionListener="#{cursoController.removerDisciplina(disc)}"
+												update="dtDisciplina" process="@this" />
+										</p:column>
+									</p:dataTable>
+
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p:outputLabel value="Turma:" />
+									<br />
+									<p:inputText id="itTurma" maxlength="6"
+										value="#{disciplinaController.entity.turma}" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p:outputLabel value="Carga Horária Teórica:" />
+									<br />
+									<p:inputText id="itChTeorica"
+										value="#{disciplinaController.entity.chTeorica}" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p:outputLabel value="Carga Horária Prática:" />
+									<br />
+									<p:inputText id="itChPratica"
+										value="#{disciplinaController.entity.chPratica}" />
+								</div>
+							</div>
 
 
-							<h:panelGroup>
-								<p:outputLabel value="Carga Horária Teórica:" />
-								<p:inputText id="itChTeorica"
-									value="#{disciplinaController.entity.chTeorica}" />
-							</h:panelGroup>
-
-							<h:panelGroup>
-								<p:outputLabel value="Carga Horária Prática:" />
-								<p:inputText id="itChPratica"
-									value="#{disciplinaController.entity.chPratica}" />
-							</h:panelGroup>
-
-							<h:panelGroup>
-								<p:outputLabel value="Carga Horária:" />
-								<p:inputText id="itChTotal"
-									value="#{disciplinaController.entity.chTotal}" />
-							</h:panelGroup>
-
-							<h:panelGroup>
-
-								<p:commandLink value="Curso:" process="@this"
-									actionListener="#{disciplinaController.abrirListagemCurso}"
-									style="color:blue; text-decoration: underline;">
-
-									<p:ajax event="dialogReturn"
-										listener="#{disciplinaController.cursoSelecionado}"
-										update="@form" />
-
-								</p:commandLink>
-								<p:inputText id="itCurso" disabled="true"
-									value="#{disciplinaController.entity.curso.nome}" />
-							</h:panelGroup>
-							 
+							<div class="row">
+								<div class="col-md-6">
+									<p:outputLabel value="Carga Horária:" />
+									<br />
+									<p:inputText id="itChTotal"
+										value="#{disciplinaController.entity.chTotal}" />
+								</div>
+							</div>
 
 
-							<h:panelGroup>
-								<p:outputLabel value="Ementa:" />
-								<br />
-								<br />
-								<p:textEditor widgetVar="editor1" id="itEmenta"
-									value="#{disciplinaController.entity.ementa}" height="300"
-									style="margin-bottom:10px" />
-							</h:panelGroup>
+							<div class="row">
+								<div class="col-md-12">
+									<p:outputLabel value="Ementa:" />
+									<br /> <br />
+									<p:textEditor widgetVar="editor1" id="itEmenta"
+										value="#{disciplinaController.entity.ementa}" height="300"
+										style="margin-bottom:10px" />
+								</div>
+							</div>
+
 
 							<p:spacer />
-						</p:panelGrid>
 
-					</div>
+							<p:panelGrid columns="4" style="text-align: center;"
+								columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+								layout="grid" styleClass="ui-fluid  ">
 
-					<p:spacer />
+								<p:commandButton value="Incluir"
+									styleClass="btn-primary btn-block"
+									disabled="#{disciplinaController.entity.id != null}"
+									actionListener="#{disciplinaController.incluir}"
+									update="@form formDataTable" process="@this pgDados" />
 
-					<p:panelGrid columns="4" style="text-align: center;"
-						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
-						layout="grid" styleClass="ui-fluid  ">
-
-						<p:commandButton value="Incluir"
-							styleClass="btn-primary btn-block"
-							disabled="#{disciplinaController.entity.id != null}"
-							actionListener="#{disciplinaController.incluir}"
-							update="@form formDataTable" process="@this pgDados" />
-
-						<p:commandButton value="Alterar"
-							styleClass="btn-primary btn-block"
-							disabled="#{disciplinaController.entity.id == null}"
-							actionListener="#{disciplinaController.alterar}"
-							update="@form formDataTable" process="@this pgDados" />
+								<p:commandButton value="Alterar"
+									styleClass="btn-primary btn-block"
+									disabled="#{disciplinaController.entity.id == null}"
+									actionListener="#{disciplinaController.alterar}"
+									update="@form formDataTable" process="@this pgDados" />
 
 
-						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
-							actionListener="#{disciplinaController.limpar}"
-							update="@form formDataTable" process="@this" />
-					</p:panelGrid>
+								<p:commandButton value="Limpar"
+									styleClass="btn-primary btn-block"
+									actionListener="#{disciplinaController.limpar}"
+									update="@form formDataTable" process="@this" />
+							</p:panelGrid>
+						</div>
 
-
-
+					</h:panelGroup>
 				</h:form>
-
 
 			</p:panel>
-			<p:spacer />
-
-
-
-
-			<p:dialog header="Pesquisa de Aluno" appendTo="@(body)"
-				widgetVar="dlg" modal="true" width="800" height="400"
-				closeOnEscape="true">
-				<h:form>
-					<p:inputText id="itPesquisa"
-						value="#{disciplinaController.pesquisa}" />
-					<p:commandButton value="Pesquisar"
-						actionListener="#{disciplinaController.pesquisar}"
-						process="@this itPesquisa" update="formDataTable" />
-				</h:form>
-				<p:panel styleClass="card no-border" toggleable="true"
-					toggleSpeed="300">
-					<h:form id="formDataTable">
-						<p:dataTable styleClass="box-primary" var="disciplina"
-							value="#{disciplinaController.listaDisciplina}">
-							<f:facet name="header">
-								<h:outputText value="Lista de Disciplinas Cadastradas" />
-							</f:facet>
-
-
-							<p:column headerText="Nome">
-								<h:outputText value="#{disciplina.nome}" />
-							</p:column>
-
-
-							<p:column>
-								<p:commandLink value="Editar" icon="fa fa-fw fa-edit"
-									styleClass="btn btn-warning" oncomplete="PF('dlg').hide();">
-									<f:ajax render="formDados" execute="@all" />
-									<f:setPropertyActionListener value="#{disciplina}"
-										target="#{disciplinaController.entity}" />
-								</p:commandLink>
-
-							</p:column>
-
-
-						</p:dataTable>
-					</h:form>
-				</p:panel>
-			</p:dialog>
-
 		</div>
+		<p:spacer />
 
 	</ui:define>
 

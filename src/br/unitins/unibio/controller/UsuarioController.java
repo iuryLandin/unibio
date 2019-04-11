@@ -7,9 +7,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.unibio.application.Util;
+import br.unitins.unibio.model.Disciplina;
 import br.unitins.unibio.model.Endereco;
 import br.unitins.unibio.model.TipoUsuario;
 import br.unitins.unibio.model.Usuario;
+import br.unitins.unibio.repository.DisciplinaRepository;
 import br.unitins.unibio.repository.UsuarioRepository;
 
 @Named
@@ -23,26 +25,52 @@ public class UsuarioController extends Controller<Usuario> {
 	}
 
 	private String pesquisa;
+	private String pesquisaDisciplina;
 	private List<Usuario> listaUsuario = null;
+	private List<Disciplina> listaDisciplinaLocal = null;
 	private Endereco endereco;
+	private Disciplina disciplina;
+
+	public void vincularDisciplina() {
+		if (getEntity().getListaDisciplina() == null)
+			getEntity().setListaDisciplina(new ArrayList<Disciplina>());
+
+		// relacionando a disciplina com o usuario
+		getDisciplina().setUsuario(getEntity());
+
+		// adicionando a disciplina na lista
+		getEntity().getListaDisciplina().add(getDisciplina());
+
+		// limpando a disciplina depois da adicao
+		setDisciplina(null);
+	}
+
+	public void removerDisciplina(Disciplina disciplina) {
+		System.out.println(disciplina.getNome());
+		getEntity().getListaDisciplina().remove(disciplina);
+	}
 
 	@Override
 	public Usuario incluir() {
-		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
-		getEntity().setSenha(senhaEncriptada);
 		getEntity().setEndereco(getEndereco());
-
+		// SENHA PADRÃO DA INCLUSAO É 123456
+		String senhaEncriptada = Util.encrypt("123456");
+		getEntity().setSenha(senhaEncriptada);
 		return super.incluir();
 	}
 
 	@Override
 	public Usuario alterar() {
-		String senhaEncriptada = Util.encrypt(getEntity().getSenha());
-		getEntity().setSenha(senhaEncriptada);
 		getEntity().setEndereco(getEndereco());
 		return super.alterar();
 	}
- 
+
+	public Usuario resetarSenha() {
+		// SENHA PADRÃO DO RESET É 123456
+		String senhaEncriptada = Util.encrypt("123456");
+		getEntity().setSenha(senhaEncriptada);
+		return super.alterar();
+	}
 
 	@Override
 	public Usuario getEntity() {
@@ -63,12 +91,23 @@ public class UsuarioController extends Controller<Usuario> {
 			listaUsuario = new ArrayList<Usuario>();
 		return listaUsuario;
 	}
+	
+	public List<Disciplina> getListaDisciplinaLocal() {
+		if (listaDisciplinaLocal == null)
+			listaDisciplinaLocal = new ArrayList<Disciplina>();
+		return listaDisciplinaLocal;
+	}
 
 	public void pesquisar() {
 		UsuarioRepository repository = new UsuarioRepository(getEntityManager());
 		listaUsuario = repository.getUsuarios(pesquisa);
 	}
-
+	
+	public void pesquisarDisciplina() {
+		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
+		listaDisciplinaLocal = repository.getDisciplinas(pesquisaDisciplina);
+	}
+	
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -77,12 +116,20 @@ public class UsuarioController extends Controller<Usuario> {
 		this.pesquisa = pesquisa;
 	}
 
+	public String getPesquisaDisciplina() {
+		return pesquisaDisciplina;
+	}
+
+	public void setPesquisaDisciplina(String pesquisaDisciplina) {
+		this.pesquisaDisciplina = pesquisaDisciplina;
+	}
+
 	public TipoUsuario[] getVetorTipoUsuario() {
 		return TipoUsuario.values();
 	}
 
 	public Endereco getEndereco() {
-		if(endereco == null)
+		if (endereco == null)
 			endereco = new Endereco();
 		return endereco;
 	}
@@ -90,7 +137,16 @@ public class UsuarioController extends Controller<Usuario> {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
-	
+
+	public Disciplina getDisciplina() {
+		if (disciplina == null) {
+			disciplina = new Disciplina();
+		}
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 
 }
