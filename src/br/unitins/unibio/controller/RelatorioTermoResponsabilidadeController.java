@@ -28,7 +28,7 @@ public class RelatorioTermoResponsabilidadeController extends Controller<Usuario
 	private String periodo;
 
 	public void imprimir() {
-		Util.redirect("/UniBio/TermoDisponibilidade?USUARIO_CPF=" + getCpf() + "&PROFESSOR_NOME="
+		Util.redirect("/UniBio/TermoResponsabilidade?USUARIO_CPF=" + getCpf() + "&PROFESSOR_NOME="
 				+ getEntity().getNome() + "&PERIODO=" + getPeriodo() + "&TEMA=" + getTema());
 	}
 

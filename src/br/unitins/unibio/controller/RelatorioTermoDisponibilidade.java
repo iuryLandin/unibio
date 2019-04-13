@@ -29,7 +29,7 @@ public class RelatorioTermoDisponibilidade extends Controller<Usuario> {
 
 	public void imprimir() {
 		Util.redirect("/UniBio/TermoDisponibilidade?USUARIO_CPF=" + getCpf() + "&CURSO_ID=" + getCurso().getId()
-				+ "&PERIODO=" + getPeriodo() + "&DIAS_SEMANA=" + diasSemana());
+				+ "&PERIODO=" + getPeriodo() + "&DIA_SEMANA=" + diasSemana());
 	}
 
 	public String getCpf() {

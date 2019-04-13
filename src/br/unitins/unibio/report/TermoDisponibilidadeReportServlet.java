@@ -23,7 +23,7 @@ public class TermoDisponibilidadeReportServlet extends ReportServlet {
 		HashMap<String, Class<?>> param = new HashMap<String, Class<?>>();
 		param.put("USUARIO_CPF", String.class);
 		param.put("CURSO_ID", Integer.class);
-		param.put("DIAS_SEMANA", String.class);
+		param.put("DIA_SEMANA", String.class);
 		param.put("PERIODO", String.class);
 		return param;
 	}
