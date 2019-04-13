@@ -8,23 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import br.unitins.unibio.factory.JPAFactory;
 
 
-@WebServlet("/TermoResponsabilidade")
-public class TermoAceiteReportServlet extends ReportServlet {
+@WebServlet("/TermoDisponibilidade")
+public class TermoDisponibilidadeReportServlet extends ReportServlet {
 
-	private static final long serialVersionUID = 1498447842163614442L;
+	private static final long serialVersionUID = 9141996493770740470L;
 
 	@Override
 	public String getArquivoJasper() {
-		return "TermoResponsabilidade.jasper";
+		return "TermoDisponibilidade.jasper";
 	}
 
 	@Override
 	public HashMap<String, Class<?>> getParametros() {
 		HashMap<String, Class<?>> param = new HashMap<String, Class<?>>();
 		param.put("USUARIO_CPF", String.class);
-		param.put("PERIODO", Integer.class);
-		param.put("PROFESSOR_NOME", String.class);
-		param.put("TEMA", String.class);
+		param.put("CURSO_ID", Integer.class);
+		param.put("DIAS_SEMANA", String.class);
+		param.put("PERIODO", String.class);
 		return param;
 	}
 

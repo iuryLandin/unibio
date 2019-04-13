@@ -46,8 +46,8 @@
 								<f:setPropertyActionListener value="#{curso}"
 									target="#{cursoController.entity}" />
 							</p:commandLink>
-
 						</p:column>
+
 
 					</p:dataTable>
 				</h:form>
@@ -85,8 +85,8 @@
 								</div>
 							</div>
 						</div>
-						<p:panelGrid columns="3"
-							columnClasses="ui-grid-col-2, ui-grid-col-2, ui-grid-col-2"
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-2, ui-grid-col-2, ui-grid-col-2, ui-grid-col-2"
 							layout="grid" styleClass="ui-fluid ">
 
 							<p:commandButton value="Incluir"
@@ -107,7 +107,17 @@
 								styleClass="btn-warning btn-block"
 								actionListener="#{cursoController.limpar}"
 								update="formDados formDataTable dtDisciplina" process="@this" />
+
+							<p:column>
+								<p:commandButton value="Remover"
+									styleClass="btn-danger btn-block"
+									disabled="#{cursoController.entity.id == null}"
+									actionListener="#{cursoController.remover}"
+									update="formDados formDataTable" process="formDados pgDados" />
+							</p:column>
 						</p:panelGrid>
+
+
 					</div>
 
 
@@ -128,7 +138,7 @@
 							</div>
 
 							<p:inputText value="#{disciplinaController.entity.curso.nome}"
-								styleClass="form-control" />
+								styleClass="form-control" type="hidden" />
 
 							<div class="col-md-6">
 								<p:outputLabel value="Turma:" />
@@ -184,18 +194,69 @@
 									styleClass="btn-primary btn-block"
 									disabled="#{disciplinaController.entity.id == null}"
 									actionListener="#{disciplinaController.alterar}"
-									update="@form formDataTable" process="@this pgDadosDisciplina" />
+									update="@form formDataTable dtDisciplina"
+									process="@this pgDadosDisciplina" />
 
 
 								<p:commandButton value="Limpar"
 									styleClass="btn-primary btn-block"
 									actionListener="#{disciplinaController.limpar}"
 									update="@form formDataTable" process="@this" />
+							
+									<p:commandButton value="Remover"
+										styleClass="btn-danger btn-block"
+										disabled="#{disciplinaController.entity.id == null}"
+										actionListener="#{disciplinaController.remover}"
+										update="formDD dtDisciplina" process="@form" />
 							</p:panelGrid>
 						</h:panelGroup>
 					</h:form>
 				</p:dialog>
 				<!-- Dialog EDITAR Disciplina -->
+
+				<!-- DIALOG BUSCAR DISCIPLINAS -->
+				<p:dialog header="Pesquisa de Disciplinas" appendTo="@(body)"
+					widgetVar="dlgBuscaDisciplina" modal="true" width="800"
+					height="400" closeOnEscape="true">
+					<h:form>
+						<p:inputText id="itPesquisa"
+							value="#{disciplinaController.pesquisa}" />
+						<p:commandButton value="Pesquisar"
+							actionListener="#{disciplinaController.pesquisar}"
+							process="@this itPesquisa" update="formDataTableBusca" />
+					</h:form>
+					<p:panel styleClass="card no-border" toggleable="true"
+						toggleSpeed="300">
+						<h:form id="formDataTableBusca">
+							<p:dataTable styleClass="box-primary" var="d"
+								value="#{disciplinaController.listaDisciplina}">
+								<f:facet name="header">
+									<h:outputText value="" />
+								</f:facet>
+
+
+								<p:column headerText="Nome">
+									<h:outputText value="#{d.nome}" />
+								</p:column>
+
+								<p:column>
+									<p:commandLink value="Editar" icon="fa fa-fw fa-edit"
+										styleClass="btn btn-warning"
+										oncomplete="PF('dlgBuscaDisciplina').hide();"
+										onsuccess="PF('dlgDisciplina').show();">
+										<f:ajax render="formDD" execute="@form" />
+										<f:setPropertyActionListener value="#{d}"
+											target="#{disciplinaController.entity}" />
+									</p:commandLink>
+								</p:column>
+
+
+							</p:dataTable>
+						</h:form>
+					</p:panel>
+				</p:dialog>
+
+				<!-- DIALOG BUSCAR DISCIPLINAS -->
 
 				<!-- LISTA DE DISCIPLINAS -->
 				<h:panelGroup id="pgDados">
@@ -212,9 +273,9 @@
 										<f:setPropertyActionListener value="#{cursoController.entity}"
 											target="#{disciplinaController.entity.curso}" />
 									</p:commandLink>
-									
+
 									<a href="#" class="btn btn-primary"
-										onclick="PF('dlgDisciplina').show();"><i
+										onclick="PF('dlgBuscaDisciplina').show();"><i
 										class="fa fa-search"></i></a>
 
 								</div>
