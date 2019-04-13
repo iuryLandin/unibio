@@ -11,12 +11,9 @@
 		<br />
 
 		<h:form id="formulario">
-			<div class="col-md-4">
-				<p:inputText id="itCpf"
-					value="#{termoDisponibilidadeController.usuarioLogado.cpf}"
-					required="true" />
-			</div>
+			
 			<div class="col-md-6">
+			<p:outputLabel value="Selecione os dias: "></p:outputLabel>
 				<p:selectManyCheckbox id="diasSemana"
 					value="#{termoDisponibilidadeController.diasSemana}">
 					<f:selectItem itemLabel="Segunda-Feira" itemValue="Segunda-Feira" />

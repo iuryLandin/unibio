@@ -13,27 +13,42 @@
 		<h:form id="formulario">
 			<div class="block">
 				<div class="row">
-					<div class="col-md-4">
-						<p:inputText id="itCpf"
-							value="#{termoDisponibilidadeController.usuarioLogado.cpf}"
-							required="true" />
-					</div>
 
-					<div class="col-md-4">
-						<p:selectOneMenu id="professor"
-							value="#{termoDisponibilidadeController.professor}">
-							<f:selectItems
-								value="#{termoDisponibilidadeController.listaProfessor}"
-								var="prof" itemLabel="#{prof.nome}" itemValue="#{prof}" />
-						</p:selectOneMenu>
+					<div class="col-md-6">
+						<p:outputLabel value="*Selecione o Professor: "></p:outputLabel>
+						
+						<p:panel styleClass="card no-border" toggleable="true"
+							toggleSpeed="300">
+							<h:form id="formDataTable">
+								<p:dataTable styleClass="box-primary" var="usu"
+									value="#{relatorioTermoAceiteController.listaProfessor}">
+									<f:facet name="header">
+										<h:outputText value="Professores Cadastrados" />
+									</f:facet>
+
+									<p:column headerText="Nome">
+										<h:outputText value="#{usu.nome}" />
+									</p:column>
+
+
+									<p:column>
+										<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
+											styleClass="btn btn-success" action="#{relatorioTermoAceiteController.imprimir}">
+											<f:ajax render="@none" execute="@all" />
+											<f:setPropertyActionListener value="#{usu}"
+												target="#{relatorioTermoAceiteController.entity}" />
+										</p:commandLink>
+
+									</p:column>
+
+
+								</p:dataTable>
+							</h:form>
+						</p:panel>
 					</div>
 				</div>
 
-				<div class="row">
-					<p:commandButton value="Imprimir" styleClass="btn-primary "
-						actionListener="#{relatorioTermoAceiteController.imprimir}" update="@form"
-						process="@this" />
-				</div>
+			 
 			</div>
 
 		</h:form>
