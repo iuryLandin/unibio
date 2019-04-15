@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="../template.xhtml">
+	<ui:define name="conteudo">
+
+		<h2 class="login-box-msg">Relatório - Termo de Disponibilidade</h2>
+		<br />
+
+		<h:form id="formulario">
+			<div class="block">
+				<div class="row">
+					<div class="col-md-4">
+						<p:inputText id="itCpf"
+							value="#{termoDisponibilidadeController.usuarioLogado.cpf}"
+							required="true" />
+					</div>
+
+					<div class="col-md-4">
+						<p:selectOneMenu id="professor"
+							value="#{termoDisponibilidadeController.professor}">
+							<f:selectItems
+								value="#{termoDisponibilidadeController.listaProfessor}"
+								var="prof" itemLabel="#{prof.nome}" itemValue="#{prof}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="row">
+					<p:commandButton value="Imprimir" styleClass="btn-primary "
+						actionListener="#{relatorioTermoAceiteController.imprimir}" update="@form"
+						process="@this" />
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
