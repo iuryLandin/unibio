@@ -9,28 +9,60 @@
 
 		<h2 class="login-box-msg">Relatório - Termo de Disponibilidade</h2>
 		<br />
-
 		<h:form id="formulario">
-			
-			<div class="col-md-6">
-			<p:outputLabel value="Selecione os dias: "></p:outputLabel>
-				<p:selectManyCheckbox id="diasSemana"
-					value="#{termoDisponibilidadeController.diasSemana}">
-					<f:selectItem itemLabel="Segunda-Feira" itemValue="Segunda-Feira" />
-					<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
-					<f:selectItem itemLabel="Quarta-Feira" itemValue="Quarta-Feira" />
-					<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
-					<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
-					<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
-				</p:selectManyCheckbox>
+			<div class="row">
+				<div class="col-md-12">
+					<p:outputLabel value="Selecione os dias: "></p:outputLabel>
+					<p:selectManyCheckbox id="diasSemana"
+						value="#{relatorioTermoDisponibilidade.diasSemana}">
+						<f:selectItem itemLabel="Segunda-Feira" itemValue="Segunda-Feira" />
+						<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
+						<f:selectItem itemLabel="Quarta-Feira" itemValue="Quarta-Feira" />
+						<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
+						<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
+						<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+					</p:selectManyCheckbox>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<p:selectOneMenu id="professor"
-					value="#{termoDisponibilidadeController.professor}">
-					<f:selectItems
-						value="#{termoDisponibilidadeController.listaProfessor}"
-						var="prof" itemLabel="#{prof.nome}" itemValue="#{prof}" />
-				</p:selectOneMenu>
+			<div class="row">
+				<div class="col-md-3">
+					 <br /> <p:outputLabel value="Período:" /> <br />
+					<p:inputText id="itPeriodo" maxlength="1"
+						value="#{relatorioTermoDisponibilidade.periodo}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6"> <br />
+					<p:outputLabel value="*Selecione o Curso: "></p:outputLabel>
+
+					<p:panel styleClass="card no-border" toggleable="true"
+						toggleSpeed="300">
+						<h:form id="formDataTable">
+							<p:dataTable styleClass="box-primary" var="curso"
+								value="#{relatorioTermoDisponibilidade.listaCurso}">
+
+								<p:column headerText="Nome">
+									<h:outputText value="#{curso.nome}" />
+								</p:column>
+
+
+								<p:column>
+									<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
+										styleClass="btn btn-success"
+										action="#{relatorioTermoDisponibilidade.imprimir}">
+										<f:ajax render="@none" execute="@all" />
+										<f:setPropertyActionListener value="#{curso}"
+											target="#{relatorioTermoDisponibilidade.curso}" />
+									</p:commandLink>
+
+								</p:column>
+
+
+							</p:dataTable>
+						</h:form>
+					</p:panel>
+				</div>
 			</div>
 		</h:form>
 	</ui:define>

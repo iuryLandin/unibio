@@ -7,21 +7,39 @@
 <ui:composition template="../template.xhtml">
 	<ui:define name="conteudo">
 
-		<h2 class="login-box-msg">Relatório - Termo de Aceite</h2>
+		<h2 class="login-box-msg">Relatório - Termo de Responsabilidade</h2>
 		<br />
 
 		<h:form id="formulario">
 			<div class="block">
+			
+			<div class="row">
+				<div class="col-md-3">
+					 <br /> <p:outputLabel value="*Período:" /> <br />
+					<p:inputText id="itPeriodo" maxlength="1"
+						value="#{relatorioTermoResponsabilidadeController.periodo}" />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					 <br /> <p:outputLabel value="*Tema:" /> <br />
+					<p:inputText id="itTema"  required="true"
+						value="#{relatorioTermoResponsabilidadeController.tema}" />
+				</div>
+			</div>
+			
+			
 				<div class="row">
-
+					
 					<div class="col-md-6">
 						<p:outputLabel value="*Selecione o Professor: "></p:outputLabel>
-						
+						<br />
 						<p:panel styleClass="card no-border" toggleable="true"
 							toggleSpeed="300">
 							<h:form id="formDataTable">
 								<p:dataTable styleClass="box-primary" var="usu"
-									value="#{relatorioTermoAceiteController.listaProfessor}">
+									value="#{relatorioTermoResponsabilidadeController.listaProfessor}">
 									<f:facet name="header">
 										<h:outputText value="Professores Cadastrados" />
 									</f:facet>
@@ -33,10 +51,10 @@
 
 									<p:column>
 										<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
-											styleClass="btn btn-success" action="#{relatorioTermoAceiteController.imprimir}">
+											styleClass="btn btn-success" action="#{relatorioTermoResponsabilidadeController.imprimir}">
 											<f:ajax render="@none" execute="@all" />
 											<f:setPropertyActionListener value="#{usu}"
-												target="#{relatorioTermoAceiteController.entity}" />
+												target="#{relatorioTermoResponsabilidadeController.entity}" />
 										</p:commandLink>
 
 									</p:column>
