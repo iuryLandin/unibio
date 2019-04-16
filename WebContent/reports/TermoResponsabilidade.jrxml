@@ -3,13 +3,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TermoResponsabilidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad3e5859-9afb-441c-82d2-098ffc274253">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Unibio"/>
-	<parameter name="USUARIO_CPF" class="java.lang.String"/>
-	<parameter name="PERIODO" class="java.lang.Integer"/>
+	<parameter name="USUARIO_CPF" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="PERIODO" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="PRODESSOR_NOME" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="TEMA" class="java.lang.String"/>
+	<parameter name="TEMA" class="java.lang.String" isForPrompting="false"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT usuario.nome
-FROM usuario]]>
+FROM usuario
+where usuario.cpf= $P{USUARIO_CPF} ]]>
 	</queryString>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
