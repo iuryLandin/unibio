@@ -23,7 +23,7 @@ public class TermoResponsabilidadeReportServlet extends ReportServlet {
 		HashMap<String, Class<?>> param = new HashMap<String, Class<?>>();
 		param.put("USUARIO_CPF", String.class);
 		param.put("PERIODO", String.class);
-		param.put("PROFESSOR_NOME", String.class);
+		param.put("PRODESSOR_NOME", String.class);
 		param.put("TEMA", String.class);
 		return param;
 	}

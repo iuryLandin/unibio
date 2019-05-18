@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -55,6 +60,52 @@ public class Util {
 		 } catch (IOException e) {
 			 e.printStackTrace();
 		 }
+	}
+	
+	
+	public static String getData() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
+
+	public static String getHora() {
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
+
+	public static  String getDia() {
+		Date d = new Date();
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+		String nome = "";
+		int dia = c.get(c.DAY_OF_WEEK);
+		switch (dia) {
+		case Calendar.SUNDAY:
+			nome = "Domingo";
+			break;
+		case Calendar.MONDAY:
+			nome = "Segunda-Feira";
+			break;
+		case Calendar.TUESDAY:
+			nome = "Terça-Feira";
+			break;
+		case Calendar.WEDNESDAY:
+			nome = "Quarta-Feira";
+			break;
+		case Calendar.THURSDAY:
+			nome = "Quinta-Feira";
+			break;
+		case Calendar.FRIDAY:
+			nome = "Sexta-Feira";
+			break;
+		case Calendar.SATURDAY:
+			nome = "sábado";
+			break;
+		}
+
+		return nome;
 	}
 
 }

@@ -3,8 +3,12 @@ package br.unitins.unibio.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+
+import org.primefaces.event.FlowEvent;
 
 import br.unitins.unibio.application.Util;
 import br.unitins.unibio.model.Disciplina;
@@ -22,6 +26,7 @@ public class UsuarioController extends Controller<Usuario> {
 
 	public UsuarioController() {
 		super(null);
+
 	}
 
 	private String pesquisa;
@@ -30,6 +35,8 @@ public class UsuarioController extends Controller<Usuario> {
 	private List<Disciplina> listaDisciplinaLocal = null;
 	private Endereco endereco;
 	private Disciplina disciplina;
+
+	private boolean skip;
 
 	public void vincularDisciplina() {
 		if (getEntity().getListaDisciplina() == null)
@@ -91,7 +98,7 @@ public class UsuarioController extends Controller<Usuario> {
 			listaUsuario = new ArrayList<Usuario>();
 		return listaUsuario;
 	}
-	
+
 	public List<Disciplina> getListaDisciplinaLocal() {
 		if (listaDisciplinaLocal == null)
 			listaDisciplinaLocal = new ArrayList<Disciplina>();
@@ -102,12 +109,12 @@ public class UsuarioController extends Controller<Usuario> {
 		UsuarioRepository repository = new UsuarioRepository(getEntityManager());
 		listaUsuario = repository.getUsuarios(pesquisa);
 	}
-	
+
 	public void pesquisarDisciplina() {
 		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
 		listaDisciplinaLocal = repository.getDisciplinas(pesquisaDisciplina);
 	}
-	
+
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -147,6 +154,23 @@ public class UsuarioController extends Controller<Usuario> {
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+	}
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
 	}
 
 }

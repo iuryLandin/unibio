@@ -1,6 +1,11 @@
 package br.unitins.unibio.model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Registro extends DefaultEntity<Registro> {
@@ -9,8 +14,14 @@ public class Registro extends DefaultEntity<Registro> {
 
 	private String data;
 	private String hora;
-	private Integer dia;
-	private Integer aluno;
+	private String dia;
+	private int tipo; //1 para biometria - 2 para manual
+	private String justificativa;
+	
+
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private Usuario usuario;
 
 	public String getData() {
 		return data;
@@ -28,20 +39,38 @@ public class Registro extends DefaultEntity<Registro> {
 		this.hora = hora;
 	}
 
-	public Integer getDia() {
+	public String getDia() {
 		return dia;
 	}
 
-	public void setDia(Integer dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
 
-	public Integer getAluno() {
-		return aluno;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setAluno(Integer aluno) {
-		this.aluno = aluno;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getJustificativa() {
+		return justificativa;
+	}
+
+	public void setJustificativa(String justificativa) {
+		this.justificativa = justificativa;
+	}
+	
+	
 
 }

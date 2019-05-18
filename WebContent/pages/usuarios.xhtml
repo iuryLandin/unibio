@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="../template.xhtml">
+	<ui:define name="conteudo">
+
+		<script>
+			function buscaCep() {
+				var cep = $("#formDados\\:itCep").val();
+				var url = "https://viacep.com.br/ws/" + cep + "/json/";
+				$.getJSON(url, function(response) {
+					$("#formDados\\:itEndereco").val(response.logradouro);
+					$("#formDados\\:itBairro").val(response.bairro);
+					$("#formDados\\:itCidade").val(response.localidade);
+					$("#formDados\\:itUf").val(response.uf);
+				});
+			}
+		</script>
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+		<div style="position: absolute; top: 100px; left: 80%">
+			<p:growl>
+				<p:autoUpdate disabled="false" />
+			</p:growl>
+		</div>
+
+		<p:dialog header="Editar Usuário" appendTo="@(body)" modal="true"
+			width="720" height="300" id="editarProf" widgetVar="dlg">
+
+			<h:form id="formDados">
+
+				<p:wizard id="wizard" flowListener="#{usuarioController.onFlowProcess}">
+					<p:tab id="pessoal" title="Dados Pessoais">
+						<p:panelGrid columns="2"  
+							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+							styleClass="ui-fluid  ">
+							
+							<h:panelGroup>
+								<p:outputLabel for="itNome" value="*Nome:" />
+								<p:inputText id="itNome"
+									value="#{usuarioController.entity.nome}" required="true">
+									<p:focus for="itNome" />
+								</p:inputText>
+ 
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itCpf" value="*CPF:" />
+								<p:inputText id="itCpf" value="#{usuarioController.entity.cpf}"
+									maxlength="11" required="true" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+
+								<p:outputLabel for="itRg" value="*RG:" />
+								<p:inputText id="itRg" value="#{usuarioController.entity.rg}"
+									required="true" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itSsp" value="*Orgão expeditor:" />
+								<p:inputText id="itSsp"
+									value="#{usuarioController.entity.orgaoExpeditor}"
+									required="true" />
+							</h:panelGroup>
+
+						</p:panelGrid>
+					</p:tab>
+
+					<p:tab id="contato" title="Contato">
+						<p:panelGrid columns="2" 
+							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+							styleClass="ui-fluid  ">
+							<h:panelGroup>
+								<p:outputLabel for="itFone" value="Telefone:" />
+								<p:inputText id="itFone"
+									value="#{usuarioController.entity.telefone}" maxlength="11" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel value="* E-mail:" />
+								<p:inputText id="itEmail"
+									value="#{usuarioController.entity.email}"
+									placeholder="joaosilva14@gmail.com" required="true" />
+							</h:panelGroup>
+						</p:panelGrid>
+					</p:tab>
+
+
+					<p:tab id="endereco" title="Endereço">
+						<p:panelGrid columns="2" 
+							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+							styleClass="ui-fluid  ">
+
+							<h:panelGroup>
+								<p:outputLabel for="itCep" value="CEP:" />
+								<p:inputText id="itCep"
+									value="#{usuarioController.endereco.cep}" maxlength="14"
+									onblur="buscaCep();" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itEndereco" value="Endereço:" />
+								<p:inputText id="itEndereco"
+									value="#{usuarioController.endereco.rua}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itBairro" value="Bairro:" />
+								<p:inputText id="itBairro"
+									value="#{usuarioController.endereco.bairro}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itNumero" value="Número:" />
+								<p:inputText id="itNumero"
+									value="#{usuarioController.endereco.numero}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itComplemento" value="Complemento:" />
+								<p:inputText id="itComplemento"
+									value="#{usuarioController.endereco.complemento}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itCidade" value="Cidade:" />
+								<p:inputText id="itCidade"
+									value="#{usuarioController.endereco.cidade}" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<p:outputLabel for="itUf" value="Estado:" />
+								<p:inputText id="itUf" value="#{usuarioController.endereco.uf}" />
+							</h:panelGroup>
+						</p:panelGrid>
+					</p:tab>
+
+					<p:tab id="adicional" title="Adicional">
+
+						<h:panelGroup>
+							<p:outputLabel for="ativo" value="*Usuário Ativo:" />
+							<p:selectOneRadio id="ativo" required="true"
+								value="#{usuarioController.entity.ativo}">
+								<f:selectItem itemLabel="Sim" itemValue="1" />
+								<f:selectItem itemLabel="Não" itemValue="0" />
+
+							</p:selectOneRadio>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<p:outputLabel value="*Tipo de Usuário:" />
+							<p:selectOneMenu value="#{usuarioController.entity.tipoUsuario}"
+								required="true">
+								<f:selectItem itemLabel="Professor"
+									itemValue="#{usuarioController.entity.tipoUsuario}" />
+								<f:selectItems value="#{usuarioController.vetorTipoUsuario}"
+									var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}" />
+							</p:selectOneMenu>
+						</h:panelGroup>
+					</p:tab>
+
+					<p:tab id="disciplina" title="Disiciplinas">
+
+						<h:panelGroup>
+							<h:panelGrid id="panelDisciplina" columns="2"
+								columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
+
+								<h:panelGroup styleClass="ui-inputgroup">
+									<p:outputLabel value="Disciplina:" />
+									<br />
+									<p:inputText value="#{usuarioController.disciplina.nome}" />
+
+									<p:commandLink styleClass="btn btn-info" value="Buscar"
+										onclick="PF('dlgDisciplinas').show();" process="@this" />
+								</h:panelGroup>
+
+							</h:panelGrid>
+
+							<h:panelGroup>
+								<p:spacer />
+								<p:commandButton value="Vincular"
+									actionListener="#{usuarioController.vincularDisciplina}"
+									update="panelDisciplina dtDisciplina"
+									process="@this panelDisciplina" />
+							</h:panelGroup>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<p:dataTable id="dtDisciplina" styleClass="box-primary"
+								var="disc" value="#{usuarioController.entity.listaDisciplina}">
+								<f:facet name="header">
+									<h:outputText value="Disciplinas Vinculadas" />
+								</f:facet>
+								<p:column headerText="Disciplina">
+									<h:outputText value="#{disc.nome}" />
+								</p:column>
+								<p:column headerText="Turma">
+									<h:outputText value="#{disc.turma}" />
+								</p:column>
+								<p:column>
+									<p:commandLink value="Remover"
+										actionListener="#{usuarioController.removerDisciplina(disc)}"
+										update="dtDisciplina" process="@this" />
+								</p:column>
+							</p:dataTable>
+
+						</h:panelGroup>
+
+					</p:tab>
+
+
+
+					<p:tab id="botoes" title="Confirmar">
+
+						<p:commandButton value="Incluir" oncomplete="PF('dlg').hide();"
+							styleClass="btn-primary btn-block"
+							disabled="#{usuarioController.entity.id != null}"
+							actionListener="#{usuarioController.incluir}" update="@form"
+							process="@this " />
+
+						<p:commandButton value="Alterar" oncomplete="PF('dlg').hide();"
+							styleClass="btn-primary btn-block"
+							disabled="#{usuarioController.entity.id == null}"
+							actionListener="#{usuarioController.alterar}" update="@form"
+							process="@this " />
+
+
+						 
+
+						<p:commandButton value="Resetar Senha"
+							styleClass="btn-secondary btn-block"
+							disabled="#{usuarioController.entity.id == null}"
+							actionListener="#{usuarioController.resetarSenha}" update="@form"
+							process="@this " />
+					</p:tab>
+
+				</p:wizard>
+
+			</h:form>
+
+		</p:dialog>
+
+		<h:form>
+			<p:inputText id="itPesquisaUsuario"
+				value="#{usuarioController.pesquisa}" />
+			<p:commandButton value="Pesquisar"
+				actionListener="#{usuarioController.pesquisar}"
+				process="@this itPesquisaUsuario" update="formDataTable2" />
+		</h:form>
+		<p:panel styleClass="card no-border" toggleable="true"
+			toggleSpeed="300">
+			<h:form id="formDataTable2">
+				<p:dataTable styleClass="box-primary" var="obj"
+					value="#{usuarioController.listaUsuario}">
+					<f:facet name="header">
+						<div class="row">
+							<div class="col-md-6">Usuários</div>
+							<div class="col-md-6">
+
+								<a href="#" class="btn btn-primary" onclick="PF('dlg').show();"><i
+									class="fa fa-plus"></i></a>
+
+							</div>
+						</div>
+					</f:facet>
+
+					<p:column headerText="CPF">
+						<h:outputText value="#{obj.cpf}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{obj.nome}" />
+					</p:column>
+
+					<p:column headerText="Tipo usuario">
+						<h:outputText value="#{obj.tipoUsuario}" />
+					</p:column>
+
+					<p:column>
+						<p:commandLink value="Editar" icon="fa fa-fw fa-edit"
+							styleClass="btn btn-warning" oncomplete="PF('dlg').show();">
+							<f:ajax render="formDados" execute="@all" />
+							<f:setPropertyActionListener value="#{obj}"
+								target="#{usuarioController.entity}" />
+						</p:commandLink>
+					</p:column>
+
+
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+
+
+</ui:composition>
+</html>

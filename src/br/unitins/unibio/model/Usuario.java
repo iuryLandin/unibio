@@ -7,7 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,15 +24,22 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private String telefone;
 	private String email;
 	private String senha;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idendereco", unique=true)
 	private Endereco endereco;
+	
 	private TipoUsuario tipoUsuario;
 	private byte[] digital;
 	private Date data_alteracao;
 	private Usuario user;
 	private boolean ativo;
-
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
 	private List<Disciplina> listaDisciplina;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+	private List<Registro> listaRegistro;
 
 	public String getNome() {
 		return nome;
@@ -152,4 +161,14 @@ public class Usuario extends DefaultEntity<Usuario> {
 		this.listaDisciplina = listaDisciplina;
 	}
 
+	public List<Registro> getListaRegistro() {
+		return listaRegistro;
+	}
+
+	public void setListaRegistro(List<Registro> listaRegistro) {
+		this.listaRegistro = listaRegistro;
+	}
+
+	
+	
 }

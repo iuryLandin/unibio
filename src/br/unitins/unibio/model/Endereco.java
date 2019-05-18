@@ -1,5 +1,8 @@
 package br.unitins.unibio.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Endereco extends DefaultEntity<Endereco> {
 
 	private static final long serialVersionUID = 6678232551387687092L;
