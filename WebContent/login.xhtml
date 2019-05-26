@@ -26,9 +26,10 @@
 					styleClass="ui-fluid  ">
 					<p class="login-box-msg">Informe seus dados para entrar no sistema</p>
 
-					<p:inputText value="#{loginController.usuario.cpf}" type="cpfl"
-						styleClass="form-control" placeholder="CPF" required="true"
+					<p:inputMask value="#{loginController.usuario.cpf}" mask="999.999.999-99"
+						styleClass="form-control" placeholder="___.___.___-__" required="true"
 						autocomplete="off" requiredMessage="O CPF é obrigatório." />
+						
 					<p:inputText value="#{loginController.usuario.senha}"
 						type="password" styleClass="form-control" placeholder="Senha"
 						required="true" autocomplete="off"

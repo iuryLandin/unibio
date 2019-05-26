@@ -216,7 +216,6 @@
 					</p:tab>
 
 
-
 					<p:tab id="botoes" title="Confirmar">
 
 						<p:commandButton value="Incluir" oncomplete="PF('dlg').hide();"
@@ -230,9 +229,6 @@
 							disabled="#{usuarioController.entity.id == null}"
 							actionListener="#{usuarioController.alterar}" update="@form"
 							process="@this " />
-
-
-						 
 
 						<p:commandButton value="Resetar Senha"
 							styleClass="btn-secondary btn-block"

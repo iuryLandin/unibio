@@ -8,6 +8,7 @@
 		<class>br.unitins.unibio.model.Evento</class>
 		<class>br.unitins.unibio.model.Registro</class>
 		<class>br.unitins.unibio.model.Usuario</class>
+		<class>br.unitins.unibio.model.RelatorioRegistro</class>
 	
 	
 	<properties>

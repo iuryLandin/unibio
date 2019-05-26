@@ -26,7 +26,7 @@ public class UsuarioController extends Controller<Usuario> {
 
 	public UsuarioController() {
 		super(null);
-
+		setSkip(false);
 	}
 
 	private String pesquisa;
@@ -60,15 +60,22 @@ public class UsuarioController extends Controller<Usuario> {
 	@Override
 	public Usuario incluir() {
 		getEntity().setEndereco(getEndereco());
+		
 		// SENHA PADRÃO DA INCLUSAO É 123456
 		String senhaEncriptada = Util.encrypt("123456");
 		getEntity().setSenha(senhaEncriptada);
+		
+		setSkip(false);
+		
 		return super.incluir();
 	}
 
 	@Override
 	public Usuario alterar() {
 		getEntity().setEndereco(getEndereco());
+		
+		setSkip(false);
+		
 		return super.alterar();
 	}
 
@@ -76,6 +83,9 @@ public class UsuarioController extends Controller<Usuario> {
 		// SENHA PADRÃO DO RESET É 123456
 		String senhaEncriptada = Util.encrypt("123456");
 		getEntity().setSenha(senhaEncriptada);
+		
+		setSkip(false);
+		
 		return super.alterar();
 	}
 

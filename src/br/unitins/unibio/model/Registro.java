@@ -17,7 +17,6 @@ public class Registro extends DefaultEntity<Registro> {
 	private String dia;
 	private int tipo; //1 para biometria - 2 para manual
 	private String justificativa;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "idusuario")

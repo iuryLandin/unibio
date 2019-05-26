@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="../template.xhtml">
+	<ui:define name="conteudo">
+
+
+		<h:form id="formDataTable">
+			<br />
+			<div class="block">
+
+				<div class="row">
+					<div class="col-md-2">
+						<p:calendar id="dtInicial" value="#{registroController.dtInicial}" name="dtInicial" />
+					</div>
+
+					<div class="col-md-2">
+						<p:calendar id="dtFinal" value="#{registroController.dtFinal}" name="dtFinal" />
+					</div>
+
+					<div class="col-md-2">
+						<p:commandButton value="Atualizar" update="formDataTable"
+							process="@this dtInicial dtFinal" actionListener="#{registroController.pesquisar}" />
+					</div>
+
+					<div class="col-md-12" align="center">
+						<img src="../resources/images/unibio_transparente.png" width="300"></img>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<b>Acadêmico: </b>
+						<h:outputText value="#{templateController.usuarioLogado.nome}" />
+						<br /> <b>Professor(a): </b> <br /> <b>Disciplina.: </b> <br />
+					</div>
+
+				</div>
+
+				<p:dataTable styleClass="box-primary" var="obj" id="formDataTable"
+					value="#{registroController.listaRelatorioRegistro}">
+					<f:facet name="header">
+						<h:outputText value="Registro de Frequência " />
+						 
+					</f:facet>
+
+					<p:column headerText="Data">
+						<h:outputText value="#{obj.data}" />
+					</p:column>
+
+					<p:column headerText="Dia">
+						<h:outputText value="#{obj.dia}" />
+					</p:column>
+
+					<p:column headerText="Entrada">
+						<h:outputText value="#{obj.entrada}" />
+					</p:column>
+
+					<p:column headerText="Saida">
+						<h:outputText value="#{obj.saida}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>
+</html>

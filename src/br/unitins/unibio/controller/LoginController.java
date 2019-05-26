@@ -17,10 +17,12 @@ public class LoginController extends DefaultController {
 	private Usuario usuario;
 	
 	public String entrar() {
+		String cpf = getUsuario().getCpf().replace(".", "").replace("-", "");
+		
 		UsuarioRepository repository = 
 				new UsuarioRepository(JPAFactory.getEntityManager());
 		Usuario usuarioValidado = repository
-				.getUsuarioLogin(getUsuario().getCpf(), getUsuario().getSenha());
+				.getUsuarioLogin(cpf, getUsuario().getSenha());
 		
 		if (usuarioValidado == null) {
 			Util.addErroMessage("Usuario ou Senha invalido.");
