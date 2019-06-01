@@ -14,16 +14,21 @@
 
 				<div class="row">
 					<div class="col-md-2">
-						<p:calendar id="dtInicial" value="#{registroController.dtInicial}" name="dtInicial" />
+						<p:calendar id="dtInicial"
+							value="#{registroController.dtInicial}"
+							name="dtInicial" />
 					</div>
 
 					<div class="col-md-2">
-						<p:calendar id="dtFinal" value="#{registroController.dtFinal}" name="dtFinal" />
+						<p:calendar id="dtFinal"
+							value="#{registroController.dtFinal}" name="dtFinal" />
 					</div>
 
+
 					<div class="col-md-2">
-						<p:commandButton value="Atualizar" update="formDataTable"
-							process="@this dtInicial dtFinal" actionListener="#{registroController.pesquisar}" />
+						<p:commandButton value="Gerar Relatório" update="formDataTable"
+							process="@this dtInicial dtFinal"
+							actionListener="#{registroController.imprimir}" />
 					</div>
 
 					<div class="col-md-12" align="center">
@@ -44,7 +49,7 @@
 					value="#{registroController.listaRelatorioRegistro}">
 					<f:facet name="header">
 						<h:outputText value="Registro de Frequência " />
-						 
+
 					</f:facet>
 
 					<p:column headerText="Data">

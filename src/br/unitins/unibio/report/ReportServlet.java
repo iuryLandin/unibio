@@ -50,7 +50,7 @@ public abstract class ReportServlet extends HttpServlet {
 
 			GeradorRelatorio gerador = new GeradorRelatorio(nome, parametros, connection);
 			gerador.gerarPDFParaOutputStream(response.getOutputStream());
-
+			
 			em.getTransaction().commit();
 			if (!connection.isClosed())
 				connection.close();
