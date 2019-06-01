@@ -1,5 +1,6 @@
 package br.unitins.unibio.controller;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import br.unitins.unibio.application.Util;
 import br.unitins.unibio.model.Registro;
 import br.unitins.unibio.model.RelatorioRegistro;
 import br.unitins.unibio.model.Usuario;
+import br.unitins.unibio.report.TesteGeraRelatorioComBeanDataSource;
 import br.unitins.unibio.repository.RegistroRepository;
 
 @Named
@@ -79,6 +81,16 @@ public class RegistroController extends Controller<Registro> {
 		Usuario usuario = getUsuarioLogado();
 		RegistroRepository repository = new RegistroRepository(getEntityManager());
 		listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, getDtInicial(), getDtFinal());
+	}
+	
+	public void imprimir() {
+ 
+	try {
+		TesteGeraRelatorioComBeanDataSource.gerarRelatorioFrequencia(getEntityManager(), getDtInicial(), getDtFinal());
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	}
 
 	public Date getDtInicial() {
