@@ -33,7 +33,7 @@ public class LoginController extends DefaultController {
 		
 		//return "pages/cadastroFuncionario.xhtml";
 		
-			Util.redirect("pages/cadastrousuario.xhtml");
+			Util.redirect("pages/administracao.xhtml");
 		return "";
 		
 	}
