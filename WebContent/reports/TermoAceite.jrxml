@@ -18,7 +18,7 @@ where cpf= $P{USUARIO_CPF}]]>
 	</background>
 	<title>
 		<band height="103" splitType="Stretch">
-			<image>
+			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="1" y="15" width="551" height="88" uuid="5b9c6b8c-4a22-4be1-8d74-4c9d97ee8f7c"/>
 				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
 			</image>
@@ -28,21 +28,14 @@ where cpf= $P{USUARIO_CPF}]]>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="71" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="348" splitType="Stretch">
 			<staticText>
 				<reportElement x="2" y="0" width="548" height="30" uuid="d9b149cb-c8f7-43af-9120-932f6cfbc436"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DECLARAÇÃO DE ACEITE DE ORIENTAÇÃO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="2" y="0" width="548" height="30" uuid="5db8bf18-7795-41cf-a88c-5e215fb8196c"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DECLARAÇÃO DE ACEITE DE ORIENTAÇÃO]]></text>
 			</staticText>
@@ -52,18 +45,18 @@ where cpf= $P{USUARIO_CPF}]]>
 					<font fontName="Arial" size="12"/>
 					<paragraph lineSpacing="Proportional" lineSpacingSize="1.5"/>
 				</textElement>
-				<text><![CDATA[Eu, professor ______________________________________________, aceito orientar __________________________________________________, aluno regular do curso de Sistemas de Informação, em seu Estágio Supervisionado, nível graduação, estando ciente dos termos constantes no Manual de Estágio da Fundação Universidade do Tocantins.
+				<text><![CDATA[  Eu, professor ________________________, aceito orientar __________________________, aluno regular do curso de Sistemas de Informação, em seu Estágio Supervisionado, nível graduação, estando ciente dos termos constantes no Manual de Estágio da Fundação Universidade do Tocantins.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="139" width="550" height="30" uuid="1deec6e4-c6c8-4354-9aba-14ceb170c4fb"/>
+				<reportElement positionType="Float" x="1" y="148" width="550" height="30" uuid="1deec6e4-c6c8-4354-9aba-14ceb170c4fb"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Palmas/TO, ]]></text>
 			</staticText>
 			<textField pattern="dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
-				<reportElement x="70" y="139" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="0c9d8d7d-49df-4fd6-afb7-a981ee8cbc8b"/>
+				<reportElement positionType="Float" x="70" y="148" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="0c9d8d7d-49df-4fd6-afb7-a981ee8cbc8b"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -79,18 +72,18 @@ Assinatura do Orientador
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="50" width="320" height="20" uuid="da9a92b8-05c0-4025-849d-991e620d0b44">
+				<reportElement positionType="Float" x="343" y="38" width="280" height="20" uuid="da9a92b8-05c0-4025-849d-991e620d0b44">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd7ee6cd-5ba3-4d2e-b3fd-24ffd51dc7fc"/>
 				</reportElement>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="12" isBold="true" isUnderline="false"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="30" width="280" height="30" uuid="8b63a890-3d3e-4faa-ae1e-427f14f3221a"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+				<reportElement positionType="Float" x="90" y="38" width="320" height="20" uuid="8b63a890-3d3e-4faa-ae1e-427f14f3221a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PROFESSOR_NOME}]]></textFieldExpression>
 			</textField>

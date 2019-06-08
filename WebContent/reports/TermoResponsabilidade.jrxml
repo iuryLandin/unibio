@@ -8,9 +8,7 @@
 	<parameter name="PRODESSOR_NOME" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="TEMA" class="java.lang.String" isForPrompting="false"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT usuario.nome
-FROM usuario
-where usuario.cpf= $P{USUARIO_CPF} ]]>
+		<![CDATA[]]>
 	</queryString>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
@@ -37,7 +35,7 @@ where usuario.cpf= $P{USUARIO_CPF} ]]>
 			<staticText>
 				<reportElement x="2" y="0" width="548" height="30" uuid="c57eec0b-6c1e-489f-8351-a285534011a6"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TERMO DE RESPONSABILIDADE DE PLÁGIO]]></text>
 			</staticText>
@@ -78,25 +76,25 @@ ACADÊMICO
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="30" y="40" width="250" height="20" uuid="07225587-e2a3-4d6c-b951-964952c7aef9">
+				<reportElement positionType="Float" x="30" y="38" width="250" height="20" uuid="07225587-e2a3-4d6c-b951-964952c7aef9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac9d1599-47e2-417a-a461-bdc7bcba0fbb"/>
 				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="70" width="260" height="17" uuid="34fa9847-c2b3-41cc-bab6-fbf940d65e11"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
+				<reportElement positionType="Float" x="53" y="61" width="260" height="30" uuid="34fa9847-c2b3-41cc-bab6-fbf940d65e11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{PRODESSOR_NOME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="90" width="100" height="20" uuid="0a3aa039-cb30-4e5d-a53f-c805f4cff3f3"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="12" isBold="true"/>
+				<reportElement positionType="Float" x="52" y="94" width="450" height="20" uuid="0a3aa039-cb30-4e5d-a53f-c805f4cff3f3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TEMA}]]></textFieldExpression>
 			</textField>
@@ -113,7 +111,18 @@ ACADÊMICO
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="320" y="24" width="100" height="30" uuid="60501bf6-dcce-4e0e-8896-9ec4a94c4dc8"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="420" y="24" width="130" height="30" uuid="5ae14468-a7ee-4751-a56b-a3a1e5536c47"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" de" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

@@ -11,29 +11,31 @@
 		<h:form id="formDataTable">
 			<br />
 			<div class="block">
-
+				
 				<div class="row">
 					<div class="col-md-2">
+					<p:outputLabel for="dtInicial" value="  Data Inicial:" />
 						<p:calendar id="dtInicial"
 							value="#{registroController.dtInicial}"
-							name="dtInicial" />
+							name="dtInicial"  required="true"/>
 					</div>
-
+					
 					<div class="col-md-2">
+					<p:outputLabel for="dtFinal" value="  Data Final:" />
 						<p:calendar id="dtFinal"
-							value="#{registroController.dtFinal}" name="dtFinal" />
+							value="#{registroController.dtFinal}" name="dtFinal" required="true" />
 					</div>
 
 
-					<div class="col-md-2">
+					
 						<p:commandButton value="Gerar Relatório" update="formDataTable"
 							process="@this dtInicial dtFinal"
 							actionListener="#{registroController.imprimir}" />
-					</div>
-
-					<div class="col-md-12" align="center">
+					
+						<div class="col-md-12" align="center">
 						<img src="../resources/images/unibio_transparente.png" width="300"></img>
 					</div>
+					
 				</div>
 
 				<div class="row">
@@ -45,31 +47,6 @@
 
 				</div>
 
-				<p:dataTable styleClass="box-primary" var="obj" id="formDataTable"
-					value="#{registroController.listaRelatorioRegistro}">
-					<f:facet name="header">
-						<h:outputText value="Registro de Frequência " />
-
-					</f:facet>
-
-					<p:column headerText="Data">
-						<h:outputText value="#{obj.data}" />
-					</p:column>
-
-					<p:column headerText="Dia">
-						<h:outputText value="#{obj.dia}" />
-					</p:column>
-
-					<p:column headerText="Entrada">
-						<h:outputText value="#{obj.entrada}" />
-					</p:column>
-
-					<p:column headerText="Saida">
-						<h:outputText value="#{obj.saida}" />
-					</p:column>
-
-
-				</p:dataTable>
 			</div>
 		</h:form>
 
