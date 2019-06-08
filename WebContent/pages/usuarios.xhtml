@@ -30,24 +30,28 @@
 			</p:growl>
 		</div>
 
+
+		
+
 		<p:dialog header="Editar Usuário" appendTo="@(body)" modal="true"
 			width="720" height="300" id="editarProf" widgetVar="dlg">
 
 			<h:form id="formDados">
 
-				<p:wizard id="wizard" flowListener="#{usuarioController.onFlowProcess}">
+				<p:wizard id="wizard"
+					flowListener="#{usuarioController.onFlowProcess}">
 					<p:tab id="pessoal" title="Dados Pessoais">
-						<p:panelGrid columns="2"  
+						<p:panelGrid columns="2"
 							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
 							styleClass="ui-fluid  ">
-							
+
 							<h:panelGroup>
 								<p:outputLabel for="itNome" value="*Nome:" />
 								<p:inputText id="itNome"
 									value="#{usuarioController.entity.nome}" required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
- 
+
 							</h:panelGroup>
 
 							<h:panelGroup>
@@ -74,7 +78,7 @@
 					</p:tab>
 
 					<p:tab id="contato" title="Contato">
-						<p:panelGrid columns="2" 
+						<p:panelGrid columns="2"
 							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
 							styleClass="ui-fluid  ">
 							<h:panelGroup>
@@ -94,7 +98,7 @@
 
 
 					<p:tab id="endereco" title="Endereço">
-						<p:panelGrid columns="2" 
+						<p:panelGrid columns="2"
 							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
 							styleClass="ui-fluid  ">
 
@@ -168,7 +172,7 @@
 
 					<p:tab id="disciplina" title="Disiciplinas">
 
-						<h:panelGroup>
+						<h:panelGroup id="pgDisc">
 							<h:panelGrid id="panelDisciplina" columns="2"
 								columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
 
@@ -292,6 +296,50 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
+		
+		<p:dialog header="Buscar Disciplinas" appendTo="@(body)" modal="true"
+			width="720" height="300" id="buscarDisc" widgetVar="dlgDisciplinas">
+
+			<h:form>
+				<p:inputText id="itPesquisa"
+					value="#{disciplinaController.pesquisa}" />
+				<p:commandButton value="Pesquisar"
+					actionListener="#{disciplinaController.pesquisar}"
+					process="@this itPesquisa" update="formDataTableBusca" />
+			</h:form>
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+				<h:form id="formDataTableBusca">
+					<p:dataTable styleClass="box-primary" var="d"
+						value="#{disciplinaController.listaDisciplina}">
+						<f:facet name="header">
+							<h:outputText value="" />
+						</f:facet>
+
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{d.nome}" />
+						</p:column>
+
+						<p:column>
+							<p:commandLink value="Vincular" icon="fa fa-fw fa-edit"
+								styleClass="btn btn-info" 
+								>
+								
+								<f:ajax render="disciplina pgDisc panelDisciplina dtDisciplina" execute="@this" />
+								<f:setPropertyActionListener value="#{d}"
+									target="#{usuarioController.disciplina}"  />
+									
+							</p:commandLink>
+						</p:column>
+					 
+						
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+
+		</p:dialog>
 
 	</ui:define>
 

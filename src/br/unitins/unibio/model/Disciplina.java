@@ -7,7 +7,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Disciplina extends DefaultEntity<Disciplina> {
 
-
 	private static final long serialVersionUID = -292446564714689523L;
 
 	private String nome;
@@ -16,15 +15,16 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	private Integer chTotal;
 	private String turma;
 	private String ementa;
-	
+	private String[] diaSemana;
+
 	@ManyToOne
-	@JoinColumn(name="idCurso") 
+	@JoinColumn(name = "idCurso")
 	private Curso curso;
 
 	@ManyToOne
-	@JoinColumn(name="idUsuario") 
+	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -88,7 +88,13 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
+
+	public String[] getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String[] diaSemana) {
+		this.diaSemana = diaSemana;
+	}
 
 }

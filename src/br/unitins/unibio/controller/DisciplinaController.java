@@ -40,10 +40,10 @@ public class DisciplinaController extends Controller<Disciplina> {
 			entity = new Disciplina();
 		return entity;
 	}
-	
+
 	@Override
 	public Disciplina incluir() {
-		
+		// getEntity().setCurso(getCurso());
 		return super.incluir();
 	}
 
@@ -63,13 +63,13 @@ public class DisciplinaController extends Controller<Disciplina> {
 		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
 		listaDisciplina = repository.getDisciplinas(pesquisa);
 	}
-	
+
 	public void editarDisciplina(Disciplina disciplina) {
 		System.out.println(disciplina.getNome());
-		//setEntity(disciplina);
+		// setEntity(disciplina);
 		entity = disciplina;
 	}
- 
+
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -93,10 +93,20 @@ public class DisciplinaController extends Controller<Disciplina> {
 	public void cursoSelecionado(SelectEvent event) {
 		Curso c = (Curso) event.getObject();
 		entity.setCurso(c);
+		listaDisciplinaPorCurso();
 	}
-	
-	 
-	
+
+	public void listaDisciplinaPorCurso() {
+		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
+		listaDisciplina = repository.getDisciplinasPorCurso(entity.getCurso());
+
+	}
+
+	public void removerDisciplina(Disciplina disciplina) {
+		System.out.println(disciplina.getNome());
+		getListaDisciplina().remove(disciplina);
+	}
+
 	public List<Curso> getListaCurso() {
 		if (listaCurso == null) {
 			CursoRepository repo = new CursoRepository(getEntityManager());
@@ -114,8 +124,5 @@ public class DisciplinaController extends Controller<Disciplina> {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-
-	
-	
 
 }

@@ -136,14 +136,12 @@
 								<p:inputText value="#{disciplinaController.entity.nome}"
 									styleClass="form-control" />
 							</div>
-
-							<p:inputText value="#{disciplinaController.entity.curso.nome}"
-								styleClass="form-control" type="hidden" />
+ 
 
 							<div class="col-md-6">
 								<p:outputLabel value="Turma:" />
 								<br />
-								<p:inputText id="itTurma" maxlength="6"
+								<p:inputText id="itTurma" maxlength="6" placeholder="2019/1"
 									value="#{disciplinaController.entity.turma}" />
 							</div>
 
@@ -169,6 +167,22 @@
 									value="#{disciplinaController.entity.chTotal}" />
 							</div>
 
+							<div class="col-md-12">
+								<p:outputLabel value="Dia da Semana" />
+								<br /> <br /> <i>Dia em que a disciplina é ministrada</i> <br />
+
+								<p:selectManyCheckbox id="diaSemana"
+									value="#{disciplinaController.entity.diaSemana}">
+									<f:selectItem itemLabel="Segunda-Feira"
+										itemValue="Segunda-Feira" />
+									<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
+									<f:selectItem itemLabel="Quarta-Feira" itemValue="Quarta-Feira" />
+									<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
+									<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
+									<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+								</p:selectManyCheckbox>
+							</div>
+
 
 							<div class="col-md-12">
 								<p:outputLabel value="Ementa:" />
@@ -188,26 +202,27 @@
 									styleClass="btn-primary btn-block"
 									disabled="#{disciplinaController.entity.id != null}"
 									actionListener="#{disciplinaController.incluir}"
-									update="@form formDataTable" process="@this pgDadosDisciplina" />
+									update="@form formDataTable"
+									process="@this pgDadosDisciplina pgDados" />
 
 								<p:commandButton value="Alterar"
 									styleClass="btn-primary btn-block"
 									disabled="#{disciplinaController.entity.id == null}"
 									actionListener="#{disciplinaController.alterar}"
 									update="@form formDataTable dtDisciplina"
-									process="@this pgDadosDisciplina" />
+									process="@this pgDadosDisciplina pgDados" />
 
 
 								<p:commandButton value="Limpar"
 									styleClass="btn-primary btn-block"
 									actionListener="#{disciplinaController.limpar}"
-									update="@form formDataTable" process="@this" />
-							
-									<p:commandButton value="Remover"
-										styleClass="btn-danger btn-block"
-										disabled="#{disciplinaController.entity.id == null}"
-										actionListener="#{disciplinaController.remover}"
-										update="formDD dtDisciplina" process="@form" />
+									update="@form formDataTable pgDados" process="@this" />
+
+								<p:commandButton value="Remover"
+									styleClass="btn-danger btn-block"
+									disabled="#{disciplinaController.entity.id == null}"
+									actionListener="#{disciplinaController.remover}"
+									update="formDD dtDisciplina pgDados" process="@form" />
 							</p:panelGrid>
 						</h:panelGroup>
 					</h:form>
@@ -244,6 +259,16 @@
 										styleClass="btn btn-warning"
 										oncomplete="PF('dlgBuscaDisciplina').hide();"
 										onsuccess="PF('dlgDisciplina').show();">
+										<f:ajax render="formDD" execute="@form" />
+										<f:setPropertyActionListener value="#{d}"
+											target="#{disciplinaController.entity}" />
+									</p:commandLink>
+								</p:column>
+
+								<p:column>
+									<p:commandLink value="Vincular" icon="fa fa-fw fa-edit"
+										styleClass="btn btn-info"
+										oncomplete="PF('dlgBuscaDisciplina').hide();">
 										<f:ajax render="formDD" execute="@form" />
 										<f:setPropertyActionListener value="#{d}"
 											target="#{disciplinaController.entity}" />

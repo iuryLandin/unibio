@@ -6,38 +6,95 @@
 
 <h:head>
 	<title>Listagem de Cursos</title>
-	<h:outputStylesheet name="css/styleTemplateTeste.css"/>  
+	<h:outputStylesheet name="css/styleTemplateTeste.css" />
 </h:head>
 
 <h:body>
-	<h:form id="formDataTable">
-	
-		<p:panelGrid id="pgDados" columns="3"
-					 columnClasses="ui-grid-col-1, ui-grid-col-9, ui-grid-col-2" layout="grid"
-					 styleClass="ui-fluid card">
-			<p:outputLabel value="Nome do Curso: "/>
-			<p:inputText id="itNome" value="#{cursoListController.nome}"/>
-			<p:commandButton value="Pesquisar" 
-							 update="formDataTable" 
-							 process="@this itNome"
-							 actionListener="#{cursoListController.pesquisar}"/>
-			<p:focus for="itNome"/>
-		</p:panelGrid>
-	
-		<p:dataTable styleClass="box-primary" var="obj" value="#{cursoListController.listaCurso}">
-			<f:facet name="header">
-				<h:outputText value="Lista de Cursos" />
-			</f:facet>
-
-			<p:column headerText="Nome">
-				<p:commandLink value="#{obj.nome}" 
-							   actionListener="#{cursoListController.selecionar(obj)}">
-				
-				</p:commandLink>
-			</p:column>
 
 
-		</p:dataTable>
-	</h:form>
+	<p:panel id="cadastro" header="Cadastrar Curso" toggleable="true" collapsed="true"
+		closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" toggleableHeader="true"
+		style="margin-bottom:20px">
+
+		<h:form id="formDados">
+			<div class="block">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="ui-inputgroup">
+
+							<p:inputText id="itNome" value="#{cursoController.entity.nome}"
+								styleClass="form-control" required="true" placeholder="Engenharia Civil">
+								<p:focus for="itNome" />
+							</p:inputText>
+
+						</div>
+					</div>
+				</div>
+				<p:panelGrid columns="4"
+					columnClasses="ui-grid-col-2, ui-grid-col-2, ui-grid-col-2, ui-grid-col-2"
+					layout="grid" styleClass="ui-fluid ">
+
+					<p:commandButton value="Incluir" styleClass="btn-success btn-block"
+						disabled="#{cursoController.entity.id != null}"
+						actionListener="#{cursoController.incluir}"
+						update="formDados formDataTable" process="formDados " />
+
+
+					<p:commandButton value="Alterar" styleClass="btn-primary btn-block"
+						disabled="#{cursoController.entity.id == null}"
+						actionListener="#{cursoController.alterar}"
+						update="formDados formDataTable" process="formDados" />
+
+
+					<p:commandButton value="Limpar" styleClass="btn-warning btn-block"
+						actionListener="#{cursoController.limpar}" update="formDados"
+						process="@this" />
+
+					<p:column>
+						<p:commandButton value="Remover" styleClass="btn-danger btn-block"
+							disabled="#{cursoController.entity.id == null}"
+							actionListener="#{cursoController.remover}" update="formDados"
+							process="formDados " />
+					</p:column>
+				</p:panelGrid>
+			</div>
+		</h:form>
+
+	</p:panel>
+
+
+	<p:panel id="pesquisa" header="Pesquisar Curso" toggleable="true"  toggleableHeader="true" 
+		closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panelPesquisa"
+		style="margin-bottom:20px">
+		<h:form id="formDataTable">
+
+			<p:panelGrid id="pgDados" columns="3"
+				columnClasses="ui-grid-col-1, ui-grid-col-9, ui-grid-col-2"
+				layout="grid" styleClass="ui-fluid card">
+				<p:outputLabel value="Nome do Curso: " />
+				<p:inputText id="itNome" value="#{cursoListController.nome}" />
+				<p:commandButton value="Pesquisar" update="formDataTable"
+					process="@this itNome"
+					actionListener="#{cursoListController.pesquisar}" />
+				<p:focus for="itNome" />
+			</p:panelGrid>
+
+			<p:dataTable styleClass="box-primary" var="obj"
+				value="#{cursoListController.listaCurso}">
+				<f:facet name="header">
+					<h:outputText value="Lista de Cursos" />
+				</f:facet>
+
+				<p:column headerText="Nome">
+					<p:commandLink value="#{obj.nome}"
+						actionListener="#{cursoListController.selecionar(obj)}">
+
+					</p:commandLink>
+				</p:column>
+
+
+			</p:dataTable>
+		</h:form>
+	</p:panel>
 </h:body>
 </html>

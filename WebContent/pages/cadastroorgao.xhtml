@@ -11,7 +11,7 @@
 
 		<script>
 			function buscaCep() {
-				var cep = $("#formDados\\:itCep").val();
+				var cep = $("#formDados\\:itcep").val();
 				var url = "https://viacep.com.br/ws/" + cep + "/json/";
 				$.getJSON(url, function(response) {
 					$("#formDados\\:itEndereco").val(response.logradouro);
@@ -48,7 +48,7 @@
 								<p:commandLink for="itNome" value="Nome Fantasia:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
-								<p:inputText id="itNome" value="#{orgaoController.entity.nome}"
+								<p:inputText id="itNome" value="#{orgaoController.entity.nomeFantasia}"
 									required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
@@ -68,7 +68,7 @@
 
 							<h:panelGroup>
 								<p:outputLabel value="CEP:" />
-								<p:inputText id="itcep" maxlength="10"
+								<p:inputText id="itcep" maxlength="10" onblur="buscaCep();"
 									value="#{orgaoController.endereco.cep}" />
 							</h:panelGroup>
 
@@ -135,7 +135,7 @@
 							<h:panelGroup>
 								<p:outputLabel value="Cargo do Responsável TCE:" />
 								<p:inputText id="itCargoRespTce"
-									value="#{orgaoController.entity.CargoRespTce}" />
+									value="#{orgaoController.entity.cargoRespTce}" />
 							</h:panelGroup>
 
 							<h:panelGroup>

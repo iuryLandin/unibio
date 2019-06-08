@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.unitins.unibio.model.Curso;
 import br.unitins.unibio.model.Disciplina;
 
 public class DisciplinaRepository extends Repository<Disciplina> {
@@ -32,6 +33,18 @@ public class DisciplinaRepository extends Repository<Disciplina> {
 				createQuery("Select p From Disciplina p Order by p.id desc").getResultList();
 			if (lista == null)
 				lista = new ArrayList<Disciplina>();
+		return lista;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Disciplina> getDisciplinasPorCurso(Curso curso) {
+		Query query = getEntityManager().
+				createQuery("Select p From Disciplina p WHERE p.curso = :curso Order by p.nome");
+		query.setParameter("curso", curso);
+		List<Disciplina> lista = query.getResultList();
+		
+		if (lista == null)
+			lista = new ArrayList<Disciplina>();
 		return lista;
 	}
 }
