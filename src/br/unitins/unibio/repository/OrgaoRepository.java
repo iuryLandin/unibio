@@ -18,7 +18,7 @@ public class OrgaoRepository extends Repository<Orgao> {
 	@SuppressWarnings("unchecked")
 	public List<Orgao> getOrgaos(String nome) {
 		Query query = getEntityManager()
-				.createQuery("Select u From Orgao u WHERE LOWER(u.nome) LIKE LOWER(:nome) Order by u.nome");
+				.createQuery("Select u From Orgao u WHERE LOWER(u.nomeFantasia) LIKE LOWER(:nome) Order by u.nomeFantasia");
 		query.setParameter("nome", "%" + nome + "%");
 		List<Orgao> lista = query.getResultList();
 

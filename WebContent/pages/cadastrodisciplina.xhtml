@@ -41,7 +41,7 @@
 						<p:column>
 							<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
 								styleClass="btn btn-primary" oncomplete="PF('dlg').hide();">
-								<f:ajax render="@form formDados dtDisciplina" execute="@all" />
+								<f:ajax render="@form formDados dtDisciplina" execute="@form" />
 								<f:setPropertyActionListener value="#{curso}"
 									target="#{cursoController.entity}" />
 							</p:commandLink>
@@ -82,7 +82,9 @@
 							</div>
 						</div>
 					</div>
-
+					</h:panelGroup>
+</h:form>
+					
 					<br />
 
 					<p:panel id="lista" header="Lista de Disciplinas" toggleable="true"
@@ -108,15 +110,16 @@
 								<p:column>
 									<p:commandLink value="Editar"
 										actionListener="#{disciplinaController.editarDisciplina(disc)}"
-										update="@form" process="@this"
-									 
-										oncomplete="PF('panelCadastro').toggle()" />
+										update="formDisciplina" process="@this @form" />
 								</p:column>
 
 							</p:dataTable>
 						</h:panelGroup>
 						<!-- /LISTA DE DISCIPLINAS -->
 					</p:panel>
+					
+					
+					<h:form id="formDisciplina">
 
 					<p:panel id="cadastro" header="Cadastrar/Editar Disciplina"
 						toggleable="true" collapsed="true" closable="false"
@@ -205,20 +208,19 @@
 							styleClass="btn-primary btn-block"
 							disabled="#{disciplinaController.entity.id != null}"
 							actionListener="#{disciplinaController.incluir}"
-							update="@form formDataTable" process="@this pgDados" />
+							update="@form formDataTable" process="@this  " />
 
 						<p:commandButton value="Alterar"
 							styleClass="btn-primary btn-block"
 							disabled="#{disciplinaController.entity.id == null}"
 							actionListener="#{disciplinaController.alterar}"
-							update="@form formDataTable" process="@this pgDados" />
+							update="@form formDataTable" process="@this  " />
 
 
 						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
 							actionListener="#{disciplinaController.limpar}"
 							update="@form formDataTable" process="@this" />
 					</p:panelGrid>
-				</h:panelGroup>
 			</h:form>
 
 

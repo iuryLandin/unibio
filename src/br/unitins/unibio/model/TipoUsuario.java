@@ -7,14 +7,14 @@ public enum TipoUsuario {
 
 	ADMINSTRADOR(0, "Adminstrador",
 			Arrays.asList("home.xhtml", "cadastrousuario.xhtml", "cadastrocurso.xhtml", "cadastrodisciplina.xhtml",
-					"cadastroevento.xhtml", "cadastroorgao.xhtml", "usuarios.xhtml", "relatorioregistro2.xhtml", "listagemcurso.xhtml", "relatorioregistro.xhtml")),
+					"cadastroevento.xhtml", "cadastroorgao.xhtml", "usuarios.xhtml", "relatorioregistro.xhtml", "listagemcurso.xhtml", "relatorioregistro.xhtml")),
 
-	PROFESSOR(1, "Professor", Arrays.asList("home.xhtml", "termoaceite.xhtml")),
+	PROFESSOR(1, "Professor", Arrays.asList("home.xhtml", "termoaceite.xhtml", "termoaceiteprofessor.xhtml")),
 
 	VISITANTE(2, "Visitante", Arrays.asList("home.xhtml") ),
 
 	ALUNO(3, "Aluno", Arrays.asList("home.xhtml", "rtermodispo.xhtml", "termoaceite.xhtml",
-			"termoresponsabilidade.xhtml", "registromanual.xhtml"));
+			"termoresponsabilidade.xhtml", "registromanual.xhtml",  "relatorioregistro.xhtml"));
 
 	private int id;
 	private String label;

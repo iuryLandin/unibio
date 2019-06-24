@@ -1,5 +1,8 @@
 package br.unitins.unibio.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Orgao extends DefaultEntity<Orgao> {
 
 	private static final long serialVersionUID = 3509668897074735687L;

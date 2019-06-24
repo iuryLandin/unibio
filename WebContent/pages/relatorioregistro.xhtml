@@ -7,69 +7,36 @@
 <ui:composition template="#{templateController.template}">
 	<ui:define name="conteudo">
 
-
+<div style="position: absolute; top: 100px; left: 80%">
+			<p:growl>
+				<p:autoUpdate disabled="false" />
+			</p:growl>
+		</div>
 		<h:form id="formDataTable">
 			<br />
 			<div class="block">
 
 				<div class="row">
 					<div class="col-md-2">
+					<p:outputLabel>Data Inicial</p:outputLabel>
 						<p:calendar id="dtInicial"
 							value="#{registroController.dtInicial}"
-							name="dtInicial" />
+							name="dtInicial" required="true" requiredMessage="Informe a data inicial" />
 					</div>
 
 					<div class="col-md-2">
+					<p:outputLabel>Data Final</p:outputLabel>
 						<p:calendar id="dtFinal"
-							value="#{registroController.dtFinal}" name="dtFinal" />
+							value="#{registroController.dtFinal}" name="dtFinal" required="true" requiredMessage="Informe a data final"/>
 					</div>
 
-
 					<div class="col-md-2">
+					<br />
 						<p:commandButton value="Gerar Relatório" update="formDataTable"
 							process="@this dtInicial dtFinal"
 							actionListener="#{registroController.imprimir}" />
 					</div>
-
-					<div class="col-md-12" align="center">
-						<img src="../resources/images/unibio_transparente.png" width="300"></img>
-					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<b>Acadêmico: </b>
-						<h:outputText value="#{templateController.usuarioLogado.nome}" />
-						<br /> <b>Professor(a): </b> <br /> <b>Disciplina.: </b> <br />
-					</div>
-
-				</div>
-
-				<p:dataTable styleClass="box-primary" var="obj" id="formDataTable"
-					value="#{registroController.listaRelatorioRegistro}">
-					<f:facet name="header">
-						<h:outputText value="Registro de Frequência " />
-
-					</f:facet>
-
-					<p:column headerText="Data">
-						<h:outputText value="#{obj.data}" />
-					</p:column>
-
-					<p:column headerText="Dia">
-						<h:outputText value="#{obj.dia}" />
-					</p:column>
-
-					<p:column headerText="Entrada">
-						<h:outputText value="#{obj.entrada}" />
-					</p:column>
-
-					<p:column headerText="Saida">
-						<h:outputText value="#{obj.saida}" />
-					</p:column>
-
-
-				</p:dataTable>
 			</div>
 		</h:form>
 

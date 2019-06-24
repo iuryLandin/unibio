@@ -28,7 +28,7 @@
 					<div style="text-align: left;"
 						class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
 						<p:panelGrid id="pgDados" columns="2"
-							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+							columnClasses="ui-grid-col-12, ui-grid-col-12" layout="grid"
 							styleClass="ui-fluid card">
 
 							<h:panelGroup>
@@ -40,30 +40,34 @@
 									<p:focus for="itNome" />
 								</p:inputText>
 							</h:panelGroup>
-							
+
 							<h:panelGroup>
 								<p:outputLabel value="Carga Horária:" />
 								<p:inputText id="itCh"
 									value="#{eventoController.entity.cargaHoraria}" />
 							</h:panelGroup>
-							
-							<div class="col-md-12">
-								<p:outputLabel value="Dia da Semana" />
-								<br /> <i>Dia em que a disciplina é ministrada</i> <br />
 
-								<p:selectManyCheckbox id="diaSemana"
-									value="#{eventoController.entity.diaSemana}">
-									<f:selectItem itemLabel="Segunda-Feira"
-										itemValue="Segunda-Feira" />
-									<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
-									<f:selectItem itemLabel="Quarta-Feira" itemValue="Quarta-Feira" />
-									<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
-									<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
-									<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
-								</p:selectManyCheckbox>
-							</div>
+							<h:panelGroup>
+								<div class="col-xs-12">
+									<p:outputLabel value="Dia da Semana" />
+									<br /> <i>Dia em que o evento é ofertado</i> <br />
 
-							
+									<p:selectManyCheckbox id="diaSemana"
+										value="#{eventoController.entity.diaSemana}">
+										<f:selectItem itemLabel="Segunda-Feira"
+											itemValue="Segunda-Feira" />
+										<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
+										<f:selectItem itemLabel="Quarta-Feira"
+											itemValue="Quarta-Feira" />
+										<f:selectItem itemLabel="Quinta-Feira"
+											itemValue="Quinta-Feira" />
+										<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
+										<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+									</p:selectManyCheckbox>
+								</div>
+							</h:panelGroup>
+
+
 							<p:spacer />
 						</p:panelGrid>
 
