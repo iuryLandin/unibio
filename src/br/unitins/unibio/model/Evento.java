@@ -9,6 +9,7 @@ public class Evento extends DefaultEntity<Evento> {
 
 	private String nome;
 	private Integer cargaHoraria;
+	private String[] diaSemana;
 
 	public String getNome() {
 		return nome;
@@ -24,6 +25,14 @@ public class Evento extends DefaultEntity<Evento> {
 
 	public void setCargaHoraria(Integer cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
+	}
+	
+	public String[] getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String[] diaSemana) {
+		this.diaSemana = diaSemana;
 	}
 
 }

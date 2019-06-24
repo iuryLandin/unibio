@@ -3,10 +3,15 @@ package br.unitins.unibio.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import br.unitins.unibio.model.Endereco;
 import br.unitins.unibio.model.Orgao;
 import br.unitins.unibio.repository.OrgaoRepository;
 
+@Named
+@ViewScoped
 public class OrgaoController extends Controller<Orgao> {
 
 	private static final long serialVersionUID = -2275796299294713882L;

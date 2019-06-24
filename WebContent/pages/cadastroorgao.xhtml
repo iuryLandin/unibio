@@ -4,14 +4,14 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<ui:composition template="../template.xhtml">
+<ui:composition template="#{templateController.template}">
 	<ui:define name="conteudo">
 		<p:ajaxStatus onstart="PF('statusDialog').show()"
 			onsuccess="PF('statusDialog').hide()" />
 
 		<script>
 			function buscaCep() {
-				var cep = $("#formDados\\:itCep").val();
+				var cep = $("#formDados\\:itcep").val();
 				var url = "https://viacep.com.br/ws/" + cep + "/json/";
 				$.getJSON(url, function(response) {
 					$("#formDados\\:itEndereco").val(response.logradouro);
@@ -48,7 +48,7 @@
 								<p:commandLink for="itNome" value="Nome Fantasia:"
 									onclick="PF('dlg').show();" process="@this"
 									style="color:blue; text-decoration: underline;" />
-								<p:inputText id="itNome" value="#{orgaoController.entity.nome}"
+								<p:inputText id="itNome" value="#{orgaoController.entity.nomeFantasia}"
 									required="true">
 									<p:focus for="itNome" />
 								</p:inputText>
@@ -56,7 +56,7 @@
 
 							<h:panelGroup>
 								<p:outputLabel value="CNPJ:" />
-								<p:inputText id="itCNPJ" maxlength="14"
+								<p:inputMask id="itCNPJ" maxlength="14" mask="99.999.999/9999-99"
 									value="#{orgaoController.entity.cnpj}" />
 							</h:panelGroup>
 
@@ -68,7 +68,7 @@
 
 							<h:panelGroup>
 								<p:outputLabel value="CEP:" />
-								<p:inputText id="itcep" maxlength="10"
+								<p:inputMask id="itcep" maxlength="10" mask="99999-999" onblur="buscaCep();"
 									value="#{orgaoController.endereco.cep}" />
 							</h:panelGroup>
 
@@ -110,7 +110,7 @@
 
 							<h:panelGroup>
 								<p:outputLabel value="Telefone:" />
-								<p:inputText id="itTelefone"
+								<p:inputMask mask="(63) 99999-9999" id="itTelefone" 
 									value="#{orgaoController.entity.telefone}" />
 							</h:panelGroup>
 
@@ -135,7 +135,7 @@
 							<h:panelGroup>
 								<p:outputLabel value="Cargo do Responsável TCE:" />
 								<p:inputText id="itCargoRespTce"
-									value="#{orgaoController.entity.CargoRespTce}" />
+									value="#{orgaoController.entity.cargoRespTce}" />
 							</h:panelGroup>
 
 							<h:panelGroup>
@@ -162,13 +162,13 @@
 							styleClass="btn-primary btn-block"
 							disabled="#{orgaoController.entity.id != null}"
 							actionListener="#{orgaoController.incluir}"
-							update="@form formDataTable" process="@this pgDados" />
+							update="@form formDataTable" process="@this pgDados formDados" />
 
 						<p:commandButton value="Alterar"
 							styleClass="btn-primary btn-block"
 							disabled="#{orgaoController.entity.id == null}"
 							actionListener="#{orgaoController.alterar}"
-							update="@form formDataTable" process="@this pgDados" />
+							update="@form formDataTable" process="@this pgDados formDados" />
 
 
 						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
@@ -199,15 +199,15 @@
 				<p:panel styleClass="card no-border" toggleable="true"
 					toggleSpeed="300">
 					<h:form id="formDataTable">
-						<p:dataTable styleClass="box-primary" var="curso"
+						<p:dataTable styleClass="box-primary" var="orgao"
 							value="#{orgaoController.listaOrgao}">
 							<f:facet name="header">
 								<h:outputText value="Órgãos Cadastrados" />
 							</f:facet>
 
 
-							<p:column headerText="Nome">
-								<h:outputText value="#{orgao.nome}" />
+							<p:column headerText="Nome Fantasia">
+								<h:outputText value="#{orgao.nomeFantasia}" />
 							</p:column>
 
 							<p:column>

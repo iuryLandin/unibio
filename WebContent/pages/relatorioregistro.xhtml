@@ -4,39 +4,69 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<ui:composition template="../template.xhtml">
+<ui:composition template="#{templateController.template}">
 	<ui:define name="conteudo">
 
-
+<div style="position: absolute; top: 100px; left: 80%">
+			<p:growl>
+				<p:autoUpdate disabled="false" />
+			</p:growl>
+		</div>
 		<h:form id="formDataTable">
 			<br />
 			<div class="block">
 				
 				<div class="row">
 					<div class="col-md-2">
+<<<<<<< HEAD
 					<p:outputLabel for="dtInicial" value="  Data Inicial:" />
+=======
+					<p:outputLabel>Data Inicial</p:outputLabel>
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 						<p:calendar id="dtInicial"
 							value="#{registroController.dtInicial}"
+<<<<<<< HEAD
 							name="dtInicial"  required="true"/>
+=======
+							name="dtInicial" required="true" requiredMessage="Informe a data inicial" />
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 					</div>
 					
 					<div class="col-md-2">
+<<<<<<< HEAD
 					<p:outputLabel for="dtFinal" value="  Data Final:" />
+=======
+					<p:outputLabel>Data Final</p:outputLabel>
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 						<p:calendar id="dtFinal"
+<<<<<<< HEAD
 							value="#{registroController.dtFinal}" name="dtFinal" required="true" />
+=======
+							value="#{registroController.dtFinal}" name="dtFinal" required="true" requiredMessage="Informe a data final"/>
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 					</div>
 
+<<<<<<< HEAD
 
 					
+=======
+					<div class="col-md-2">
+					<br />
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 						<p:commandButton value="Gerar Relatório" update="formDataTable"
 							process="@this dtInicial dtFinal"
 							actionListener="#{registroController.imprimir}" />
+<<<<<<< HEAD
 					
 						<div class="col-md-12" align="center">
 						<img src="../resources/images/unibio_transparente.png" width="300"></img>
 					</div>
 					
+=======
+					</div>
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 				</div>
+<<<<<<< HEAD
 
 				<div class="row">
 					<div class="col-md-12">
@@ -47,6 +77,8 @@
 
 				</div>
 
+=======
+>>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 			</div>
 		</h:form>
 

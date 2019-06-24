@@ -34,7 +34,6 @@ public class RegistroRepository extends Repository<Registro> {
 	public List<RelatorioRegistro> getListaRelatorioRegistro(Usuario usuario, Date dtInicial, Date dtFinal) {
 		List<RelatorioRegistro> lista = new ArrayList<RelatorioRegistro>();
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			Date startDate = dtInicial;
 			Date endDate = dtFinal;
