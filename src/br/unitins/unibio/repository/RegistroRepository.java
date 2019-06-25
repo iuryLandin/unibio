@@ -37,11 +37,13 @@ public class RegistroRepository extends Repository<Registro> {
 		try {
 			Date startDate = dtInicial;
 			Date endDate = dtFinal;
+ 
 
 			Calendar start = Calendar.getInstance();
 			start.setTime(startDate);
 			Calendar end = Calendar.getInstance();
 			end.setTime(endDate);
+			System.out.println("\n\n\n \t\t\t "+ end + "\n\n\n\n");
 
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 

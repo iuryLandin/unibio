@@ -15,7 +15,7 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 	private Integer chTotal;
 	private String turma;
 	private String ementa;
-	private String[] diaSemana;
+	private String diaSemana;
 
 	@ManyToOne
 	@JoinColumn(name = "idCurso")
@@ -89,11 +89,11 @@ public class Disciplina extends DefaultEntity<Disciplina> {
 		this.usuario = usuario;
 	}
 
-	public String[] getDiaSemana() {
+	public String getDiaSemana() {
 		return diaSemana;
 	}
 
-	public void setDiaSemana(String[] diaSemana) {
+	public void setDiaSemana(String diaSemana) {
 		this.diaSemana = diaSemana;
 	}
 

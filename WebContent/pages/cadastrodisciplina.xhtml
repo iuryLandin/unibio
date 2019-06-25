@@ -41,7 +41,7 @@
 						<p:column>
 							<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
 								styleClass="btn btn-primary" oncomplete="PF('dlg').hide();">
-								<f:ajax render="@form formDados dtDisciplina" execute="@form" />
+								<f:ajax render="@form formDados dtDisciplina" execute="@all" />
 								<f:setPropertyActionListener value="#{curso}"
 									target="#{cursoController.entity}" />
 							</p:commandLink>
@@ -82,9 +82,7 @@
 							</div>
 						</div>
 					</div>
-					</h:panelGroup>
-</h:form>
-					
+
 					<br />
 
 					<p:panel id="lista" header="Lista de Disciplinas" toggleable="true"
@@ -110,16 +108,13 @@
 								<p:column>
 									<p:commandLink value="Editar"
 										actionListener="#{disciplinaController.editarDisciplina(disc)}"
-										update="formDisciplina" process="@this @form" />
+										update="@form" process="@this"	/>
 								</p:column>
 
 							</p:dataTable>
 						</h:panelGroup>
 						<!-- /LISTA DE DISCIPLINAS -->
 					</p:panel>
-					
-					
-					<h:form id="formDisciplina">
 
 					<p:panel id="cadastro" header="Cadastrar/Editar Disciplina"
 						toggleable="true" collapsed="true" closable="false"
@@ -150,7 +145,7 @@
 								<p:outputLabel value="Dia da Semana" />
 								<br /> <i>Dia em que a disciplina é ministrada</i> <br />
 
-								<p:selectManyCheckbox id="diaSemana"
+								<p:selectOneMenu id="diaSemana"
 									value="#{disciplinaController.entity.diaSemana}">
 									<f:selectItem itemLabel="Segunda-Feira"
 										itemValue="Segunda-Feira" />
@@ -159,7 +154,7 @@
 									<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
 									<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
 									<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
-								</p:selectManyCheckbox>
+								</p:selectOneMenu>
 								
 								<br /><br />
 							</div>
@@ -208,19 +203,20 @@
 							styleClass="btn-primary btn-block"
 							disabled="#{disciplinaController.entity.id != null}"
 							actionListener="#{disciplinaController.incluir}"
-							update="@form formDataTable" process="@this  " />
+							update="@form formDataTable" process="@this pgDados" />
 
 						<p:commandButton value="Alterar"
 							styleClass="btn-primary btn-block"
 							disabled="#{disciplinaController.entity.id == null}"
 							actionListener="#{disciplinaController.alterar}"
-							update="@form formDataTable" process="@this  " />
+							update="@form formDataTable" process="@this pgDados" />
 
 
 						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
 							actionListener="#{disciplinaController.limpar}"
 							update="@form formDataTable" process="@this" />
 					</p:panelGrid>
+				</h:panelGroup>
 			</h:form>
 
 

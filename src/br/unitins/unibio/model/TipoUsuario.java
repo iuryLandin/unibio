@@ -9,7 +9,7 @@ public enum TipoUsuario {
 			Arrays.asList("home.xhtml", "cadastrousuario.xhtml", "cadastrocurso.xhtml", "cadastrodisciplina.xhtml",
 					"cadastroevento.xhtml", "cadastroorgao.xhtml", "usuarios.xhtml", "relatorioregistro.xhtml", "listagemcurso.xhtml", "relatorioregistro.xhtml")),
 
-	PROFESSOR(1, "Professor", Arrays.asList("home.xhtml", "termoaceite.xhtml", "termoaceiteprofessor.xhtml")),
+	PROFESSOR(1, "Professor", Arrays.asList("home.xhtml", "termoaceite.xhtml", "relatorioregistro.xhtml", "termoaceiteprofessor.xhtml")),
 
 	VISITANTE(2, "Visitante", Arrays.asList("home.xhtml") ),
 

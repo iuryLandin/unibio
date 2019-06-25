@@ -18,67 +18,31 @@
 				
 				<div class="row">
 					<div class="col-md-2">
-<<<<<<< HEAD
+ 
 					<p:outputLabel for="dtInicial" value="  Data Inicial:" />
-=======
-					<p:outputLabel>Data Inicial</p:outputLabel>
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 						<p:calendar id="dtInicial"
 							value="#{registroController.dtInicial}"
-<<<<<<< HEAD
-							name="dtInicial"  required="true"/>
-=======
+ 
 							name="dtInicial" required="true" requiredMessage="Informe a data inicial" />
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 					</div>
 					
 					<div class="col-md-2">
-<<<<<<< HEAD
+
 					<p:outputLabel for="dtFinal" value="  Data Final:" />
-=======
-					<p:outputLabel>Data Final</p:outputLabel>
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
-						<p:calendar id="dtFinal"
-<<<<<<< HEAD
-							value="#{registroController.dtFinal}" name="dtFinal" required="true" />
-=======
-							value="#{registroController.dtFinal}" name="dtFinal" required="true" requiredMessage="Informe a data final"/>
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
+ 						<p:calendar id="dtFinal"
+							value="#{registroController.dtFinal}" 
+							name="dtFinal" required="true" requiredMessage="Informe a data final"/>
 					</div>
 
-<<<<<<< HEAD
-
-					
-=======
 					<div class="col-md-2">
 					<br />
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
+
 						<p:commandButton value="Gerar Relatório" update="formDataTable"
 							process="@this dtInicial dtFinal"
 							actionListener="#{registroController.imprimir}" />
-<<<<<<< HEAD
-					
-						<div class="col-md-12" align="center">
-						<img src="../resources/images/unibio_transparente.png" width="300"></img>
-					</div>
-					
-=======
-					</div>
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
-				</div>
-<<<<<<< HEAD
-
-				<div class="row">
-					<div class="col-md-12">
-						<b>Acadêmico: </b>
-						<h:outputText value="#{templateController.usuarioLogado.nome}" />
-						<br /> <b>Professor(a): </b> <br /> <b>Disciplina.: </b> <br />
 					</div>
 
 				</div>
-
-=======
->>>>>>> branch 'master' of https://github.com/iuryLandin/unibio.git
 			</div>
 		</h:form>
 
