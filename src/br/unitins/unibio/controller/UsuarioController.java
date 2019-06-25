@@ -27,6 +27,8 @@ public class UsuarioController extends Controller<Usuario> {
 	public UsuarioController() {
 		super(null);
 		setSkip(false);
+		this.pesquisa = "";
+		pesquisar();
 	}
 
 	private String pesquisa;
@@ -59,7 +61,7 @@ public class UsuarioController extends Controller<Usuario> {
 
 	@Override
 	public Usuario incluir() {
-		getEntity().setEndereco(getEndereco());
+		//getEntity().setEndereco(getEndereco());
 		
 		// SENHA PADRÃO DA INCLUSAO É 123456
 		String senhaEncriptada = Util.encrypt("123456");
@@ -72,7 +74,7 @@ public class UsuarioController extends Controller<Usuario> {
 
 	@Override
 	public Usuario alterar() {
-		getEntity().setEndereco(getEndereco());
+		//getEntity().setEndereco(getEndereco());
 		
 		setSkip(false);
 		

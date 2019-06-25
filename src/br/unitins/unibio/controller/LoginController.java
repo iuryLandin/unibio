@@ -17,7 +17,7 @@ public class LoginController extends DefaultController {
 	private Usuario usuario;
 	
 	public String entrar() {
-		String cpf = getUsuario().getCpf().replace(".", "").replace("-", "");
+		String cpf = getUsuario().getCpf();
 		
 		UsuarioRepository repository = 
 				new UsuarioRepository(JPAFactory.getEntityManager());
