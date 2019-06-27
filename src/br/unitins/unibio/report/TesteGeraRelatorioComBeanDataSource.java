@@ -2,9 +2,6 @@ package br.unitins.unibio.report;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +13,7 @@ import javax.servlet.ServletContext;
 
 import br.unitins.unibio.application.Session;
 import br.unitins.unibio.application.Util;
+import br.unitins.unibio.model.Disciplina;
 import br.unitins.unibio.model.RelatorioRegistro;
 import br.unitins.unibio.model.Usuario;
 import br.unitins.unibio.repository.RegistroRepository;
@@ -28,7 +26,7 @@ public class TesteGeraRelatorioComBeanDataSource {
 	
 	 
 
-	public static void gerarRelatorioFrequencia(EntityManager em, Date inicio, Date fim) throws FileNotFoundException {
+	public static void gerarRelatorioFrequencia(EntityManager em, String disciplinaDia, Date inicio, Date fim) throws FileNotFoundException {
 		
 		try {
 			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -38,7 +36,7 @@ public class TesteGeraRelatorioComBeanDataSource {
 			Usuario usuario =  (Usuario) Session.getInstance().getAttribute( "usuarioLogado" );
 			
 			RegistroRepository repository = new RegistroRepository( em );
-			listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, inicio, fim);
+			listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, disciplinaDia, inicio, fim);
 			
 			JasperCompileManager.compileReportToFile( nome + ".jrxml");
 			

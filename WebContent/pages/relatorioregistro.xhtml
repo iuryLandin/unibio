@@ -7,7 +7,7 @@
 <ui:composition template="#{templateController.template}">
 	<ui:define name="conteudo">
 
-<div style="position: absolute; top: 100px; left: 80%">
+		<div style="position: absolute; top: 100px; left: 80%">
 			<p:growl>
 				<p:autoUpdate disabled="false" />
 			</p:growl>
@@ -15,30 +15,52 @@
 		<h:form id="formDataTable">
 			<br />
 			<div class="block">
-				
+				<div class="row" style="text-align: center;">
+					<div class="col-md-12">
+						<center>
+							<h3>Relatório de Frequencia</h3>
+						</center>
+					</div>
+				</div>
+				<br />
+				<hr />
 				<div class="row">
-					<div class="col-md-2">
- 
-					<p:outputLabel for="dtInicial" value="  Data Inicial:" />
-						<p:calendar id="dtInicial"
-							value="#{registroController.dtInicial}"
- 
-							name="dtInicial" required="true" requiredMessage="Informe a data inicial" />
-					</div>
-					
+
 					<div class="col-md-2">
 
-					<p:outputLabel for="dtFinal" value="  Data Final:" />
- 						<p:calendar id="dtFinal"
-							value="#{registroController.dtFinal}" 
-							name="dtFinal" required="true" requiredMessage="Informe a data final"/>
+						<p:outputLabel for="dtInicial" value="  Data Inicial:" />
+						<p:calendar id="dtInicial" value="#{registroController.dtInicial}"
+							name="dtInicial" required="true"
+							requiredMessage="Informe a data inicial" />
 					</div>
 
 					<div class="col-md-2">
-					<br />
+
+						<p:outputLabel for="dtFinal" value="  Data Final:" />
+						<p:calendar id="dtFinal" value="#{registroController.dtFinal}"
+							name="dtFinal" required="true"
+							requiredMessage="Informe a data final" />
+					</div>
+
+					<div class="col-md-3">
+
+						<p:outputLabel for="disciplina" value="Disciplina" />
+						<p:selectOneMenu id="disciplina"
+							value="#{registroController.diaSemana}">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="0" />
+							<f:selectItems value="#{registroController.listaDisciplina}"
+								var="a" itemLabel="#{a.nome}" itemValue="#{a.diaSemana}" />
+						</p:selectOneMenu>
+
+					</div>
+
+					<div class="col-md-2">
+						<br />
+				 
+
 
 						<p:commandButton value="Gerar Relatório" update="formDataTable"
-							process="@this dtInicial dtFinal"
+							process="@form"
 							actionListener="#{registroController.imprimir}" />
 					</div>
 

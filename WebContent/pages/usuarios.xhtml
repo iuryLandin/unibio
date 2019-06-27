@@ -185,21 +185,16 @@
 							<h:panelGrid id="panelDisciplina" columns="2"
 								columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
 
-								<h:panelGroup styleClass="ui-inputgroup">
-									<p:outputLabel value="Disciplina:" />
-									<p:commandLink styleClass="btn btn-info" value="Buscar"
+								<h:panelGroup styleClass="ui-inputgroup float-right">
+									<br />
+									<p:commandLink styleClass="btn btn-info" value="Buscar Disciplinas"
 										onclick="PF('dlgDisciplinas').show();" process="@this" />
+									<br />
 								</h:panelGroup>
 
 							</h:panelGrid>
 
-							<h:panelGroup>
-								<p:spacer />
-								<p:commandButton value="Vincular"
-									actionListener="#{usuarioController.vincularDisciplina}"
-									update="panelDisciplina dtDisciplina"
-									process="@this panelDisciplina" />
-							</h:panelGroup>
+							
 						</h:panelGroup>
 
 						<h:panelGroup>
@@ -340,10 +335,8 @@
 							<p:commandLink value="Selecionar" icon="fa fa-fw fa-edit"
 								styleClass="btn btn-info">
 
-								<f:ajax render="disciplina pgDisc panelDisciplina dtDisciplina"
-									execute="@this" />
-								<f:setPropertyActionListener value="#{d}"
-									target="#{usuarioController.disciplina}" />
+								<p:ajax event="click" update="formDados:dtDisciplina" 
+									listener="#{usuarioController.vincularDisciplina(d)}"  />
 
 							</p:commandLink>
 						</p:column>

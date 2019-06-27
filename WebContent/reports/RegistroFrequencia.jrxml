@@ -28,7 +28,7 @@
 				<textElement>
 					<font fontName="Arial" size="14"/>
 				</textElement>
-				<text><![CDATA[Aluno:]]></text>
+				<text><![CDATA[Aluno>>:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="65" width="554" height="20" uuid="9e8099e8-1b96-478a-a5f2-33c449f91c02"/>

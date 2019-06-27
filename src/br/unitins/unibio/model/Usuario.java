@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -35,7 +37,13 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private Usuario user;
 	private boolean ativo;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+//	private List<Disciplina> listaDisciplina;
+	
+	@ManyToMany
+	@JoinTable(name="UsuarioDisciplina", 
+			joinColumns=  @JoinColumn(name="idusuario"),
+			inverseJoinColumns= @JoinColumn(name="iddisciplina") )
 	private List<Disciplina> listaDisciplina;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)

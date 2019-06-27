@@ -8,12 +8,14 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.unitins.unibio.application.Session;
 import br.unitins.unibio.application.Util;
+import br.unitins.unibio.model.Disciplina;
 import br.unitins.unibio.model.Registro;
 import br.unitins.unibio.model.RelatorioRegistro;
 import br.unitins.unibio.model.Usuario;
 import br.unitins.unibio.report.TesteGeraRelatorioComBeanDataSource;
-import br.unitins.unibio.repository.RegistroRepository;
+import br.unitins.unibio.repository.DisciplinaRepository;
 
 @Named
 @ViewScoped
@@ -23,6 +25,8 @@ public class RegistroController extends Controller<Registro> {
 
 	public RegistroController() {
 		super(null);
+
+		popularListaDisciplina();
 	}
 
 	private List<Registro> listaRegistro = null;
@@ -30,6 +34,22 @@ public class RegistroController extends Controller<Registro> {
 
 	private Date dtInicial;
 	private Date dtFinal;
+
+	private String diaSemana;
+	private Disciplina disciplina;
+	private List<Disciplina> listaDisciplina = null;
+
+	public List<Disciplina> getListaDisciplina() {
+		if (listaDisciplina == null)
+			listaDisciplina = new ArrayList<Disciplina>();
+		return listaDisciplina;
+	}
+
+	public void popularListaDisciplina() {
+		Usuario usuario = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
+		DisciplinaRepository repository = new DisciplinaRepository(getEntityManager());
+		listaDisciplina = repository.getDisciplinaByUsuario(usuario);
+	}
 
 	@Override
 	public Registro incluir() {
@@ -77,20 +97,20 @@ public class RegistroController extends Controller<Registro> {
 		return listaRelatorioRegistro;
 	}
 
-	public void pesquisar() {
-		Usuario usuario = getUsuarioLogado();
-		RegistroRepository repository = new RegistroRepository(getEntityManager());
-		listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, getDtInicial(), getDtFinal());
-	}
-	
+//	public void pesquisar() {
+//		Usuario usuario = getUsuarioLogado();
+//		RegistroRepository repository = new RegistroRepository(getEntityManager());
+//		listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, getDtInicial(), getDtFinal());
+//	}
+
 	public void imprimir() {
- 
-	try {
-		TesteGeraRelatorioComBeanDataSource.gerarRelatorioFrequencia(getEntityManager(), getDtInicial(), getDtFinal());
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	 
+		try {
+			TesteGeraRelatorioComBeanDataSource.gerarRelatorioFrequencia(getEntityManager(), getDiaSemana(), getDtInicial(), getDtFinal());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Date getDtInicial() {
@@ -107,6 +127,24 @@ public class RegistroController extends Controller<Registro> {
 
 	public void setDtFinal(Date dtFinal) {
 		this.dtFinal = dtFinal;
+	}
+
+	public String getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
+	public Disciplina getDisciplina() {
+		if (disciplina == null)
+			disciplina = new Disciplina();
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 }

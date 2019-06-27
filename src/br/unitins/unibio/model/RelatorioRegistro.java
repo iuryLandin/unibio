@@ -11,6 +11,8 @@ public class RelatorioRegistro extends DefaultEntity<RelatorioRegistro> {
 	private String dia;
 	private String entrada;
 	private String saida;
+	private String disciplina;
+	private String matricula;
 
 	public String getData() {
 		return data;
@@ -44,4 +46,21 @@ public class RelatorioRegistro extends DefaultEntity<RelatorioRegistro> {
 		this.saida = saida;
 	}
 
+	public String getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	
 }

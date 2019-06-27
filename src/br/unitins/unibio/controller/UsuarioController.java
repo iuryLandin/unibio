@@ -3,6 +3,7 @@ package br.unitins.unibio.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -40,15 +41,20 @@ public class UsuarioController extends Controller<Usuario> {
 
 	private boolean skip;
 
-	public void vincularDisciplina() {
+	public void vincularDisciplina(Disciplina disciplina) {
 		if (getEntity().getListaDisciplina() == null)
 			getEntity().setListaDisciplina(new ArrayList<Disciplina>());
 
 		// relacionando a disciplina com o usuario
-		getDisciplina().setUsuario(getEntity());
+		//getDisciplina().setUsuario(getEntity());
 
 		// adicionando a disciplina na lista
-		getEntity().getListaDisciplina().add(getDisciplina());
+		// getEntity().getListaDisciplina().add(getDisciplina());
+
+		 
+		alertVincular(disciplina.getNome());
+		
+		getEntity().getListaDisciplina().add(disciplina);
 
 		// limpando a disciplina depois da adicao
 		setDisciplina(null);
@@ -59,25 +65,31 @@ public class UsuarioController extends Controller<Usuario> {
 		getEntity().getListaDisciplina().remove(disciplina);
 	}
 
+
+	public void alertVincular(String nomeDisciplina){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Disiplina vinculada com sucesso: " + nomeDisciplina ));
+	}
+
 	@Override
 	public Usuario incluir() {
-		//getEntity().setEndereco(getEndereco());
-		
+		// getEntity().setEndereco(getEndereco());
+
 		// SENHA PADRÃO DA INCLUSAO É 123456
 		String senhaEncriptada = Util.encrypt("123456");
 		getEntity().setSenha(senhaEncriptada);
-		
+
 		setSkip(false);
-		
+
 		return super.incluir();
 	}
 
 	@Override
 	public Usuario alterar() {
-		//getEntity().setEndereco(getEndereco());
-		
+		// getEntity().setEndereco(getEndereco());
+
 		setSkip(false);
-		
+
 		return super.alterar();
 	}
 
@@ -85,9 +97,9 @@ public class UsuarioController extends Controller<Usuario> {
 		// SENHA PADRÃO DO RESET É 123456
 		String senhaEncriptada = Util.encrypt("123456");
 		getEntity().setSenha(senhaEncriptada);
-		
+
 		setSkip(false);
-		
+
 		return super.alterar();
 	}
 

@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import br.unitins.unibio.model.Curso;
 import br.unitins.unibio.model.Disciplina;
+import br.unitins.unibio.model.Usuario;
 
 public class DisciplinaRepository extends Repository<Disciplina> {
 	
@@ -21,6 +22,24 @@ public class DisciplinaRepository extends Repository<Disciplina> {
 				createQuery("Select p From Disciplina p WHERE LOWER(p.nome) LIKE LOWER(:nome) Order by p.nome");
 		query.setParameter("nome", "%" + nome + "%");
 		List<Disciplina> lista = query.getResultList();
+		
+		if (lista == null)
+			lista = new ArrayList<Disciplina>();
+		return lista;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Disciplina> getDisciplinaByUsuario(Usuario usuario) {
+		Query query = getEntityManager().
+				createNativeQuery("SELECT D.* " + 
+						" FROM usuario AS U, disciplina AS D " + 
+						" JOIN usuariodisciplina AS UD " + 
+						" ON UD.idusuario = ? AND UD.iddisciplina = D.id WHERE U.id = UD.idusuario; ", Disciplina.class);
+		query.setParameter(1, usuario.getId() );
+		List<Disciplina> lista =  query.getResultList();
+	 
+		
+		 System.out.println("\n\n \t\t\t Materia: " + lista.get(0).getNome() );
 		
 		if (lista == null)
 			lista = new ArrayList<Disciplina>();

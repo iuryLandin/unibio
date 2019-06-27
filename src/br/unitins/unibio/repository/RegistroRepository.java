@@ -31,7 +31,7 @@ public class RegistroRepository extends Repository<Registro> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<RelatorioRegistro> getListaRelatorioRegistro(Usuario usuario, Date dtInicial, Date dtFinal) {
+	public List<RelatorioRegistro> getListaRelatorioRegistro(Usuario usuario, String diaSemana, Date dtInicial, Date dtFinal) {
 		List<RelatorioRegistro> lista = new ArrayList<RelatorioRegistro>();
 
 		try {
@@ -43,7 +43,6 @@ public class RegistroRepository extends Repository<Registro> {
 			start.setTime(startDate);
 			Calendar end = Calendar.getInstance();
 			end.setTime(endDate);
-			System.out.println("\n\n\n \t\t\t "+ end + "\n\n\n\n");
 
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -56,9 +55,10 @@ public class RegistroRepository extends Repository<Registro> {
 				Query query = getEntityManager().createNativeQuery("SELECT id, data, dia, "
 						+ " (SELECT hora FROM registro WHERE idusuario = ?usuario AND data = ?strDate ORDER BY hora ASC LIMIT 1) AS entrada, "
 						+ " (SELECT hora FROM registro WHERE idusuario = ?usuario AND data = ?strDate ORDER BY hora DESC LIMIT 1) AS saida "
-						+ " FROM registro WHERE data = ?strDate LIMIT 1; ");
+						+ " FROM registro WHERE data = ?strDate AND dia = ?diaSemana LIMIT 1; ");
 				query.setParameter("strDate", strDate);
 				query.setParameter("usuario", usuario.getId() );
+				query.setParameter("diaSemana", diaSemana );
 				
 				try {
 				Object[] result = (Object[]) query.getSingleResult();
