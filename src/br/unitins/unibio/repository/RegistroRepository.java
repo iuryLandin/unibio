@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.unitins.unibio.model.Disciplina;
 import br.unitins.unibio.model.Registro;
 import br.unitins.unibio.model.RelatorioRegistro;
 import br.unitins.unibio.model.Usuario;
@@ -31,7 +32,7 @@ public class RegistroRepository extends Repository<Registro> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<RelatorioRegistro> getListaRelatorioRegistro(Usuario usuario, String diaSemana, Date dtInicial, Date dtFinal) {
+	public List<RelatorioRegistro> getListaRelatorioRegistro(Usuario usuario, Disciplina disciplina, Date dtInicial, Date dtFinal) {
 		List<RelatorioRegistro> lista = new ArrayList<RelatorioRegistro>();
 
 		try {
@@ -58,7 +59,7 @@ public class RegistroRepository extends Repository<Registro> {
 						+ " FROM registro WHERE data = ?strDate AND dia = ?diaSemana LIMIT 1; ");
 				query.setParameter("strDate", strDate);
 				query.setParameter("usuario", usuario.getId() );
-				query.setParameter("diaSemana", diaSemana );
+				query.setParameter("diaSemana", disciplina.getDiaSemana() );
 				
 				try {
 				Object[] result = (Object[]) query.getSingleResult();
@@ -76,6 +77,9 @@ public class RegistroRepository extends Repository<Registro> {
 					relatorioRegistro.setDia(dia);
 					relatorioRegistro.setEntrada(entrada);
 					relatorioRegistro.setSaida(saida);
+					relatorioRegistro.setNome(usuario.getNome());
+					relatorioRegistro.setMatricula(usuario.getMatricula());
+					relatorioRegistro.setDisciplina(disciplina.getNome());
 
 					lista.add(relatorioRegistro);
 

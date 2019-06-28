@@ -26,28 +26,29 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private String telefone;
 	private String email;
 	private String senha;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idendereco", unique=true)
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idendereco", unique = true)
 	private Endereco endereco;
-	
+
 	private TipoUsuario tipoUsuario;
 	private byte[] digital;
 	private Date data_alteracao;
 	private Usuario user;
 	private boolean ativo;
-	
+
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
 //	private List<Disciplina> listaDisciplina;
-	
+
 	@ManyToMany
-	@JoinTable(name="UsuarioDisciplina", 
-			joinColumns=  @JoinColumn(name="idusuario"),
-			inverseJoinColumns= @JoinColumn(name="iddisciplina") )
+	@JoinTable(name = "UsuarioDisciplina", joinColumns = @JoinColumn(name = "idusuario"), inverseJoinColumns = @JoinColumn(name = "iddisciplina"))
 	private List<Disciplina> listaDisciplina;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
 	private List<Registro> listaRegistro;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+	private List<Atividade> listaAtividade;
 
 	public String getNome() {
 		return nome;
@@ -177,6 +178,12 @@ public class Usuario extends DefaultEntity<Usuario> {
 		this.listaRegistro = listaRegistro;
 	}
 
-	
-	
+	public List<Atividade> getListaAtividade() {
+		return listaAtividade;
+	}
+
+	public void setListaAtividade(List<Atividade> listaAtividade) {
+		this.listaAtividade = listaAtividade;
+	}
+
 }

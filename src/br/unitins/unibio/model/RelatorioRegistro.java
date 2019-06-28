@@ -13,6 +13,7 @@ public class RelatorioRegistro extends DefaultEntity<RelatorioRegistro> {
 	private String saida;
 	private String disciplina;
 	private String matricula;
+	private String nome;
 
 	public String getData() {
 		return data;
@@ -62,5 +63,12 @@ public class RelatorioRegistro extends DefaultEntity<RelatorioRegistro> {
 		this.matricula = matricula;
 	}
 
-	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 }

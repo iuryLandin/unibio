@@ -104,9 +104,8 @@ public class RegistroController extends Controller<Registro> {
 //	}
 
 	public void imprimir() {
-	 
 		try {
-			TesteGeraRelatorioComBeanDataSource.gerarRelatorioFrequencia(getEntityManager(), getDiaSemana(), getDtInicial(), getDtFinal());
+			TesteGeraRelatorioComBeanDataSource.gerarRelatorioFrequencia(getEntityManager(), getDisciplina(), getDtInicial(), getDtFinal());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

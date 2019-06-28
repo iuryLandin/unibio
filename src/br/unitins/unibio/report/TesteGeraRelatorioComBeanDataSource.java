@@ -26,7 +26,7 @@ public class TesteGeraRelatorioComBeanDataSource {
 	
 	 
 
-	public static void gerarRelatorioFrequencia(EntityManager em, String disciplinaDia, Date inicio, Date fim) throws FileNotFoundException {
+	public static void gerarRelatorioFrequencia(EntityManager em, Disciplina disciplina, Date inicio, Date fim) throws FileNotFoundException {
 		
 		try {
 			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -36,7 +36,7 @@ public class TesteGeraRelatorioComBeanDataSource {
 			Usuario usuario =  (Usuario) Session.getInstance().getAttribute( "usuarioLogado" );
 			
 			RegistroRepository repository = new RegistroRepository( em );
-			listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, disciplinaDia, inicio, fim);
+			listaRelatorioRegistro = repository.getListaRelatorioRegistro(usuario, disciplina, inicio, fim);
 			
 			JasperCompileManager.compileReportToFile( nome + ".jrxml");
 			

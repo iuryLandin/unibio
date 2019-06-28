@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="#{templateController.template}">
+	<ui:define name="conteudo">
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+		<div style="position: absolute; top: 100px; left: 80%">
+			<p:growl>
+				<p:autoUpdate disabled="false" />
+			</p:growl>
+		</div>
+
+		<h2 class="align-center">Plano de Trabalho Discente</h2>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<input type="button" value="+" onclick="cadastrar();" />
+			</div>
+		</div>
+
+		<div id="lista">
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+				<h:form id="formDataTable">
+					<p:dataTable styleClass="box-primary" var="atv"
+						value="#{atividadeController.listaAtividade}">
+						<f:facet name="header">
+							<h:outputText value="Atividades Enviadas" />
+						</f:facet>
+
+						<p:column headerText="Mês">
+							<h:outputText value="#{atv.mes}" />
+						</p:column>
+
+						<p:column headerText="Semana">
+							<h:outputText value="#{atv.semana}" />
+						</p:column>
+
+						<p:column>
+							<p:commandLink value="Editar" icon="fa fa-fw fa-edit"
+								styleClass="btn btn-warning" oncomplete="PF('dlg').hide();">
+								<f:ajax render="formDados" execute="@all" />
+								<f:setPropertyActionListener value="#{atv}"
+									target="#{atividadeController.entity}" />
+							</p:commandLink>
+
+						</p:column>
+
+
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</div>
+
+
+		<div class="ui-g-12" style="display: none;" id="formulario">
+			<br />
+			<p class="text-warning">
+				Uma vez submetida, a atividade não poderá ser excluída, somente
+				alterada. <br /> <i>Todos os campos são obrigatórios</i>
+			</p>
+
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+
+				<h:form id="formDados">
+
+					<div class="row">
+
+						<div Class="col-md-4">
+							<p:outputLabel value="Mês: " />
+							<p:selectOneMenu id="mes"
+								value="#{atividadeController.entity.mes}" required="true">
+								<f:selectItem itemLabel="Janeiro" itemValue="Janeiro" />
+								<f:selectItem itemLabel="Fevereiro" itemValue="Fevereiro" />
+								<f:selectItem itemLabel="Março" itemValue="Março" />
+								<f:selectItem itemLabel="Abril" itemValue="Abril" />
+								<f:selectItem itemLabel="Maio" itemValue="Maio" />
+								<f:selectItem itemLabel="Junho" itemValue="Junho" />
+								<f:selectItem itemLabel="Julho" itemValue="Julho" />
+								<f:selectItem itemLabel="Agosto" itemValue="Agosto" />
+								<f:selectItem itemLabel="Setembro" itemValue="Setembro" />
+								<f:selectItem itemLabel="Outubro" itemValue="Outubro" />
+								<f:selectItem itemLabel="Novembro" itemValue="Novembro" />
+								<f:selectItem itemLabel="Dezembro" itemValue="Dezembro" />
+							</p:selectOneMenu>
+						</div>
+
+						<div Class="col-md-4">
+							<p:outputLabel value="Semana: " />
+							<p:selectOneMenu id="semana"
+								value="#{atividadeController.entity.semana}" required="true">
+								<f:selectItem itemLabel="1ª Semana" itemValue="1ª Semana" />
+								<f:selectItem itemLabel="2ª Semana" itemValue="2ª Semana" />
+								<f:selectItem itemLabel="3ª Semana" itemValue="3ª Semana" />
+								<f:selectItem itemLabel="4ª Semana" itemValue="4ª Semana" />
+							</p:selectOneMenu>
+						</div>
+
+						<div Class="col-md-4">
+							<div>
+								<p:outputLabel value="Dia da Semana" />
+								<p:selectOneMenu id="diaSemana" required="true"
+									value="#{atividadeController.entity.diaSemana}">
+									<f:selectItem itemLabel="Segunda-Feira"
+										itemValue="Segunda-Feira" />
+									<f:selectItem itemLabel="Terça-Feira" itemValue="Terça-Feira" />
+									<f:selectItem itemLabel="Quarta-Feira" itemValue="Quarta-Feira" />
+									<f:selectItem itemLabel="Quinta-Feira" itemValue="Quinta-Feira" />
+									<f:selectItem itemLabel="Sexta-Feira" itemValue="Sexta-Feira" />
+									<f:selectItem itemLabel="Sábado" itemValue="Sábado" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div Class="col-md-4">
+							<p:outputLabel value="Horário:" />
+							<br />
+							<p:inputText id="ithorario" required="true"
+								value="#{ativiadeController.entity.horario}" />
+						</div>
+
+						<div Class="col-md-4">
+							<p:outputLabel value="Carga Horária:" />
+							<br />
+							<p:inputText id="itCh" required="true"
+								value="#{atividadeController.entity.cargaHoraria}" />
+						</div>
+
+						<div Class="col-md-12">
+							<p:outputLabel value="Atividade: " />
+							<br />
+							<p:inputTextarea id="atividade" required="true"
+								value="#{atividadeController.entity.atividade}"
+								styleClass="form-control" />
+						</div>
+
+					</div>
+
+					<p:spacer />
+
+					<p:panelGrid columns="4" style="text-align: center;"
+						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+						layout="grid" styleClass="ui-fluid  ">
+
+						<p:commandButton value="Incluir"
+							styleClass="btn-primary btn-block"
+							disabled="#{atividadeController.entity.id != null}"
+							actionListener="#{atividadeController.incluir}"
+							update="@form formDataTable" process="@this formDados" />
+
+						<p:commandButton value="Alterar"
+							styleClass="btn-primary btn-block"
+							disabled="#{atividadeController.entity.id == null}"
+							actionListener="#{atividadeController.alterar}"
+							update="@form formDataTable" process="@this formDados" />
+
+
+						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
+							actionListener="#{atividadeController.limpar}"
+							update="@form formDataTable formDados" process="@this" />
+					</p:panelGrid>
+
+
+
+				</h:form>
+
+
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

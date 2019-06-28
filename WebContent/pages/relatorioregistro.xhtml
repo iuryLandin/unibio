@@ -45,11 +45,10 @@
 					<div class="col-md-3">
 
 						<p:outputLabel for="disciplina" value="Disciplina" />
-						<p:selectOneMenu id="disciplina"
-							value="#{registroController.diaSemana}">
-							<f:selectItem itemLabel="--- Selecione ---" itemValue="0" />
+						<p:selectOneMenu id="disciplina" required="true" requiredMessage="" process="@this"
+							value="#{registroController.disciplina}" converter="disciplinaConverter">
 							<f:selectItems value="#{registroController.listaDisciplina}"
-								var="a" itemLabel="#{a.nome}" itemValue="#{a.diaSemana}" />
+								var="a" itemLabel="#{a.nome}" itemValue="#{a}"  />
 						</p:selectOneMenu>
 
 					</div>
