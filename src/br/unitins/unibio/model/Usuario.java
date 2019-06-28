@@ -99,6 +99,8 @@ public class Usuario extends DefaultEntity<Usuario> {
 	}
 
 	public Endereco getEndereco() {
+		if (endereco == null)
+			endereco = new Endereco();
 		return endereco;
 	}
 
